@@ -1,4 +1,4 @@
-package main;
+package main.GUIs;
 
 import java.io.File;
 import java.awt.Graphics;
