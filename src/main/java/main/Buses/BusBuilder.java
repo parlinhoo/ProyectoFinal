@@ -3,6 +3,7 @@ package main.Buses;
 import main.Enums.Asiento;
 import main.Enums.Espacio;
 
+import javax.swing.*;
 import java.util.Arrays;
 
 public class BusBuilder {
@@ -71,5 +72,13 @@ class test {
             }
             System.out.println();
         }
+
+        JFrame ventana = new JFrame("anashe");
+        ventana.setSize(1000, 600);
+        ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        ventana.setVisible(true);
+        ventana.setLayout(null);
+        GridBus grid = new GridBus(bus, 1);
+        ventana.add(grid);
     }
 }
