@@ -4,6 +4,7 @@ import main.Enums.Asiento;
 import main.Enums.Espacio;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Arrays;
 
 public class BusBuilder {
@@ -79,6 +80,9 @@ class test {
         ventana.setVisible(true);
         ventana.setLayout(null);
         GridBus grid = new GridBus(bus, 1);
+        grid.setVisible(true);
         ventana.add(grid);
+        ventana.pack();
+
     }
 }
