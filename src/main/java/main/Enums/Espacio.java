@@ -6,5 +6,9 @@ public enum Espacio {
     SALONCAMA(),
     SALONCAMAPLUS(),
     ESCALERA(),
-    EMERGENCIA(),
+    EMERGENCIA();
+
+    public Boolean IsASeat() {
+        return (this == Espacio.SEMICAMA || this == Espacio.SALONCAMA || this == Espacio.SALONCAMAPLUS);
+    }
 }

@@ -67,7 +67,7 @@ class test {
         Espacio[][] sp = bus.get_1F_structure();
         for (Espacio[] ar : sp) {
             for (Espacio esp : ar) {
-                System.out.printf("%.10s ", esp == null ? "nada" : esp.name());
+                System.out.printf("%s ", esp == null ? "nada" : esp.name());
             }
             System.out.println();
         }
