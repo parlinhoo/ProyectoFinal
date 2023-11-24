@@ -11,10 +11,11 @@ public class PanelPrincipal extends JPanel {
     public PanelPrincipal() {
         this.cardLayout = new CardLayout();
         this.setLayout(cardLayout);
-        this.panelInicio = new Panel1();
-        this.panelBuses = new Panel2();
+        this.panelInicio = new Panel1(this, cardLayout);
+        this.panelBuses = new Panel2(this, cardLayout);
         this.panelAsientos = new Panel3();
         this.add(panelInicio, "panelInicio");
         this.add(panelBuses, "panelBuses");
+        this.add(panelAsientos, "panelAsientos");
     }
 }

@@ -5,10 +5,11 @@ import java.awt.*;
 
 public class Panel2 extends JPanel {
 
-    public Panel2() {
+    public Panel2(JPanel panel, CardLayout cardLayout) {
         this.setBackground(Color.darkGray);
         this.setLayout(new FlowLayout());
         JButton volverButton = new JButton("Volver");
+        volverButton.addActionListener(e -> cardLayout.show(panel, "panelInicio"));
         volverButton.setPreferredSize(new Dimension(200,80));
         this.add(volverButton, BorderLayout.CENTER);
     }
