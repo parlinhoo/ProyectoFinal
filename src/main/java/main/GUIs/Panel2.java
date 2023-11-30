@@ -1,9 +1,11 @@
 package main.GUIs;
 
+import main.ScaleLib.ScaleFrame;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class Panel2 extends JPanel {
+public class Panel2 extends ScaleFrame {
 
     public Panel2() {
         this.setBackground(Color.darkGray);
