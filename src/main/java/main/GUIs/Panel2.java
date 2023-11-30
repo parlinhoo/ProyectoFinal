@@ -1,55 +1,57 @@
 package main.GUIs;
 
-import main.ScaleLib.ScaleFrame;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class Panel2 extends ScaleFrame {
+public class Panel2 extends JPanel {
 
     public Panel2(JPanel panel, CardLayout cardLayout) {
         this.setBackground(Color.WHITE);
         this.setLayout(new BorderLayout());
 
-        JPanel header = new JPanel() {
+        JPanel header = new JPanel(new GridBagLayout()) {
             {
                 setPreferredSize(new Dimension(800, 75));
-                setLayout(null);
                 setBackground(Color.WHITE);
 
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.weightx = 1;
+                gbc.anchor = GridBagConstraints.WEST;
+                gbc.insets = new Insets(0, 10, 0, 0);  // Agregado un espacio a la izquierda
+
                 JButton volverButton = new JButton();
-                volverButton.setBounds(10, 20, 50, 30);
-                ImageIcon volver = new ImageIcon("src/main/resources/return.png");
-                volverButton.setIcon(volver);
+                volverButton.setPreferredSize(new Dimension(50, 30));  // Establecer un tamaño preferido
+                volverButton.setIcon(new ImageIcon("src/main/resources/return.png"));
                 volverButton.addActionListener(e -> cardLayout.show(panel, "panelInicio"));
-                add(volverButton);
+                add(volverButton, gbc);
+
+                gbc.anchor = GridBagConstraints.CENTER;
 
                 JLabel headline = new JLabel("Buses Disponibles");
-                headline.setBounds(350, 0, 360, 75);
                 headline.setFont(new Font("IMPACT", Font.BOLD, 35));
-                this.add(headline);
+                add(headline, gbc);
             }
         };
 
         JPanel contenedorBuses = new JPanel(){
             {
-            setLayout(new GridLayout(0,1,0 ,10));
-            int buses = 0;
-            for (int i=1; i<3; i++){
-                add(new PanelBus(i));
-                buses++;
-                if(i == 2){
-                    i = 0;
+                setLayout(new GridLayout(0,1,0 ,10));
+                int buses = 0;
+                for (int i=1; i<3; i++){
+                    add(new PanelBus(i));
+                    buses++;
+                    if(i == 2){
+                        i = 0;
+                    }
+                    if (buses == 15){
+                        break;
+                    }
                 }
-                if (buses == 15){
-                    break;
-                }
-            }
             }
         };
 
-        JTextArea textArea = new JTextArea();
-        textArea.setText("This is some text in the scroll pane.");
         JScrollPane scrollPane = new JScrollPane(contenedorBuses);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);

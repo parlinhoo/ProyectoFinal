@@ -63,7 +63,7 @@ class test {
         BusBuilder builder = new BusBuilder();
         builder.reset();
         builder.set1FSize(5, 10);
-        builder.addObjRect(1, 2, 1, 1, 6, Espacio.SALONCAMAPLUS);
+        builder.addObjRect(1, 2, 1, 2, 6, Espacio.SEMICAMA);
         builder.addObjRow(1, 0, Espacio.SEMICAMA);
         Bus bus = builder.getBus();
         Espacio[][] sp = bus.get_1F_structure();
@@ -75,14 +75,14 @@ class test {
         }
 
         JFrame ventana = new JFrame("anashe");
-        ventana.setSize(1000, 600);
-        ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        ventana.setVisible(true);
         ventana.setLayout(null);
         GridBus grid = new GridBus(bus, 1);
         grid.setVisible(true);
         ventana.add(grid);
         ventana.pack();
+        ventana.setDefaultCloseOperation(3);
+        ventana.setSize(1000, 800);
+        ventana.setVisible(true);
 
     }
 }

@@ -1,12 +1,9 @@
 package main.GUIs;
 
-import main.ScaleLib.Dim2;
-import main.ScaleLib.ScaleFrame;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class Panel1 extends ScaleFrame {
+public class Panel1 extends JPanel {
 
     public Panel1(JPanel panel, CardLayout cardLayout) {
         this.setBackground(Color.WHITE);
