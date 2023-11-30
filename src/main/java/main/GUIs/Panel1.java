@@ -8,36 +8,64 @@ import java.awt.*;
 
 public class Panel1 extends ScaleFrame {
 
-    public Panel1() {
-        this.setBackground(Color.GRAY);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 50, 300));
+    public Panel1(JPanel panel, CardLayout cardLayout) {
+        this.setBackground(Color.WHITE);
+        this.setLayout(null);
 
-        String[] ciudades = {"Santiago", "Valparaíso", "Concepción"};
+        int y = 350;
+        int fontSize = 20;
+        String fontName = "IMPACT";
+        int labelWidth = 70;
+        int labelHeight = 40;
+        int comboBoxWidth = 120;
+        int comboBoxHeight = 30;
+        int gapX = 60;
+        int gapY = 10;
 
+        String[] ciudades = {"", "Santiago", "Valparaíso", "Concepción"};
+        JLabel from = new JLabel("Desde:");
+        from.setBounds(150, y - comboBoxHeight  - gapY, labelWidth, labelHeight);
+        from.setFont(new Font(fontName, Font.PLAIN, fontSize));
+        this.add(from);
         JComboBox<String> comboBoxOrigen = new JComboBox<>(ciudades);
-        this.add(new JLabel("Desde:"));
+        comboBoxOrigen.setBounds(150, y, comboBoxWidth, comboBoxHeight);
         this.add(comboBoxOrigen);
 
+        JLabel to = new JLabel("Hasta:");
+        to.setBounds(from.getX() + comboBoxWidth + gapX, y - comboBoxHeight  - gapY, labelWidth, labelHeight);
+        to.setFont(new Font(fontName, Font.PLAIN, fontSize));
+        this.add(to);
         JComboBox<String> comboBoxDestino = new JComboBox<>(ciudades);
-        this.add(new JLabel("Hasta:"));
+        comboBoxDestino.setBounds(comboBoxOrigen.getX() + comboBoxWidth + gapX, y, comboBoxWidth, comboBoxHeight);
         this.add(comboBoxDestino);
 
-        String[] dias = new String[31];
-        for (int i = 0; i < 31; i++) {
-            dias[i] = String.valueOf(i + 1);
+        String[] dias = new String[32];
+        dias[0] = "";
+        for (int i = 1; i < 32; i++) {
+            dias[i] = String.valueOf(i);
         }
 
+        JLabel day = new JLabel("Día:");
+        day.setBounds(to.getX() + comboBoxWidth + gapX, y - comboBoxHeight  - gapY, labelWidth, labelHeight);
+        day.setFont(new Font(fontName, Font.PLAIN, fontSize));
+        this.add(day);
         JComboBox<String> comboBoxDia = new JComboBox<>(dias);
-        this.add(new JLabel("Día:"));
+        comboBoxDia.setBounds(comboBoxDestino.getX() + comboBoxWidth + gapX, y, comboBoxWidth, comboBoxHeight);
         this.add(comboBoxDia);
 
-        String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+        String[] meses = {"", "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"};
+        JLabel month = new JLabel("Mes:");
+        month.setBounds(day.getX() + comboBoxWidth + gapX, y - comboBoxHeight  - gapY, labelWidth, labelHeight);
+        month.setFont(new Font(fontName, Font.PLAIN, fontSize));
+        this.add(month);
         JComboBox<String> comboBoxMes = new JComboBox<>(meses);
-        this.add(new JLabel("Mes:"));
+        comboBoxMes.setBounds(comboBoxDia.getX() + comboBoxWidth + gapX, y, comboBoxWidth, comboBoxHeight);
         this.add(comboBoxMes);
 
         JButton BuscarBusesButton = new JButton("Buscar buses");
-        BuscarBusesButton.setPreferredSize(new Dimension(200,80));
+        BuscarBusesButton.setBounds(400, 450, 150, 50);
+        BuscarBusesButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
+        BuscarBusesButton.addActionListener(e -> cardLayout.show(panel, "panelBuses"));
         this.add(BuscarBusesButton);
     }
 }

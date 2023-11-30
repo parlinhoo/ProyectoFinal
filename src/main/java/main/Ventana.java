@@ -7,15 +7,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Ventana extends JFrame {
-    public static int ancho = 1000;
-    public static int alto = 800;
+
+    public static int altura = 800;
+    public static int anchura = 1000;
     private ScaleFrame PanelPrincipal;
+
     public Ventana() {
         super("Sistema de reserva de asientos de autobús");
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.PanelPrincipal = new PanelPrincipal();
         this.add(PanelPrincipal);
-        this.setSize(ancho, alto);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(Ventana.anchura, Ventana.altura);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }

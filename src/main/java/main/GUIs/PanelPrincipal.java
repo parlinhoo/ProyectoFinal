@@ -15,8 +15,8 @@ public class PanelPrincipal extends ScaleFrame {
         this.setSize(Dim2.getSizeFromScale(1, 1));
         this.cardLayout = new CardLayout();
         this.setLayout(cardLayout);
-        this.panelInicio = new Panel1();
-        this.panelBuses = new Panel2();
+        this.panelInicio = new Panel1(this, cardLayout);
+        this.panelBuses = new Panel2(this, cardLayout);
         this.panelAsientos = new Panel3();
         this.add(panelInicio);
         this.add(panelBuses);

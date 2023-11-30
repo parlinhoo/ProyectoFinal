@@ -7,11 +7,53 @@ import java.awt.*;
 
 public class Panel2 extends ScaleFrame {
 
-    public Panel2() {
-        this.setBackground(Color.darkGray);
-        this.setLayout(new FlowLayout());
-        JButton volverButton = new JButton("Volver");
-        volverButton.setPreferredSize(new Dimension(200,80));
-        this.add(volverButton, BorderLayout.CENTER);
+    public Panel2(JPanel panel, CardLayout cardLayout) {
+        this.setBackground(Color.WHITE);
+        this.setLayout(new BorderLayout());
+
+        JPanel header = new JPanel() {
+            {
+                setPreferredSize(new Dimension(800, 75));
+                setLayout(null);
+                setBackground(Color.WHITE);
+
+                JButton volverButton = new JButton();
+                volverButton.setBounds(10, 20, 50, 30);
+                ImageIcon volver = new ImageIcon("src/main/resources/return.png");
+                volverButton.setIcon(volver);
+                volverButton.addActionListener(e -> cardLayout.show(panel, "panelInicio"));
+                add(volverButton);
+
+                JLabel headline = new JLabel("Buses Disponibles");
+                headline.setBounds(350, 0, 360, 75);
+                headline.setFont(new Font("IMPACT", Font.BOLD, 35));
+                this.add(headline);
+            }
+        };
+
+        JPanel contenedorBuses = new JPanel(){
+            {
+            setLayout(new GridLayout(0,1,0 ,10));
+            int buses = 0;
+            for (int i=1; i<3; i++){
+                add(new PanelBus(i));
+                buses++;
+                if(i == 2){
+                    i = 0;
+                }
+                if (buses == 15){
+                    break;
+                }
+            }
+            }
+        };
+
+        JTextArea textArea = new JTextArea();
+        textArea.setText("This is some text in the scroll pane.");
+        JScrollPane scrollPane = new JScrollPane(contenedorBuses);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        this.add(header,BorderLayout.NORTH);
+        this.add(scrollPane, BorderLayout.CENTER);
     }
 }
