@@ -6,7 +6,7 @@ import java.awt.*;
 public class Panel1 extends JPanel {
 
     public Panel1(JPanel panel, CardLayout cardLayout) {
-        this.setBackground(Color.GRAY);
+        this.setBackground(Color.WHITE);
         this.setLayout(null);
 
         int y = 350;
