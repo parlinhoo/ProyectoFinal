@@ -19,10 +19,10 @@ public class Panel2 extends JPanel {
                 gbc.gridy = 0;
                 gbc.weightx = 1;
                 gbc.anchor = GridBagConstraints.WEST;
-                gbc.insets = new Insets(0, 10, 0, 0);  // Agregado un espacio a la izquierda
+                gbc.insets = new Insets(0, 10, 0, 0);
 
                 JButton volverButton = new JButton();
-                volverButton.setPreferredSize(new Dimension(50, 30));  // Establecer un tamaño preferido
+                volverButton.setPreferredSize(new Dimension(50, 30));
                 volverButton.setIcon(new ImageIcon("src/main/resources/return.png"));
                 volverButton.addActionListener(e -> cardLayout.show(panel, "panelInicio"));
                 add(volverButton, gbc);
