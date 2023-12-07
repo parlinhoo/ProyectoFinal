@@ -5,6 +5,16 @@ import java.awt.*;
 
 public class Panel2 extends JPanel {
 
+    private JPanel contenedor;
+
+    public void updateBuses(PanelBus[] buses) {
+        this.contenedor.removeAll();
+        for (PanelBus panel : buses) {
+            panel.updateSeats();
+            this.contenedor.add(panel);
+        }
+    }
+
     public Panel2(JPanel panel, CardLayout cardLayout) {
         this.setBackground(Color.WHITE);
         this.setLayout(new BorderLayout());
@@ -36,6 +46,7 @@ public class Panel2 extends JPanel {
         };
 
         JPanel contenedorBuses = new JPanel();
+        this.contenedor = contenedorBuses;
         contenedorBuses.setLayout(new GridLayout(0,1,0 ,10));
 
         JScrollPane scrollPane = new JScrollPane(contenedorBuses);

@@ -35,7 +35,7 @@ public class GridBus extends JPanel {
     public GridBus(Viaje viaje, int floor) {
         this.piso = floor;
         this.viaje = viaje;
-        viaje.setGrid(this);
+        viaje.setGrid(this, floor);
         Asiento[][] asientos = (floor == 2) ? viaje.getAsientosF2() : viaje.getAsientosF1();
         int buswidth = asientos.length;
         int buslength = asientos[0].length;

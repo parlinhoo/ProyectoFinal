@@ -1,13 +1,17 @@
 package main.GUIs;
 
+import main.Enums.Distancia;
+
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Panel1 extends JPanel {
 
-    public Panel1(JPanel panel, CardLayout cardLayout) {
+    public Panel1(PanelPrincipal panel, CardLayout cardLayout) {
         this.setBackground(Color.WHITE);
         this.setLayout(null);
         int y = 350;
@@ -64,7 +68,14 @@ public class Panel1 extends JPanel {
         BuscarBusesButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
         BuscarBusesButton.setForeground(Color.WHITE);
         BuscarBusesButton.setBackground(Color.BLACK);
-        BuscarBusesButton.addActionListener(e -> cardLayout.show(panel, "panelBuses"));
+        BuscarBusesButton.addActionListener((e) -> {
+            String origen = (String) comboBoxOrigen.getSelectedItem();
+            String destino = (String) comboBoxDestino.getSelectedItem();
+            Date hora = (Date) datePicker.getValue();
+            LocalDate horaLocal = LocalDate.of(hora.getYear()+1900, hora.getMonth()+1, hora.getDate());
+            panel.updateBuses(origen, destino, horaLocal);
+            cardLayout.show(panel, "panelBuses");
+        });
         this.add(BuscarBusesButton);
     }
 }

@@ -14,7 +14,10 @@ public class Viaje {
     private final String destino;
     private final LocalDateTime fechaInicio;
 
-    private GridBus grid;
+    private GridBus gridF1;
+    private GridBus gridF2;
+
+    private PanelBus panelViaje;
 
     private Asiento[][] asientosF1;
     private Asiento[][] asientosF2;
@@ -31,8 +34,17 @@ public class Viaje {
         else this.asientosF1 = asientos;
     }
 
-    public void setGrid(GridBus grid) {
-        this.grid = grid;
+    public void setGrid(GridBus grid, int piso) {
+        if (piso == 2) this.gridF2 = grid;
+        else this.gridF1 = grid;
+    }
+    public PanelBus getPanel() {
+        return this.panelViaje;
+    }
+
+    private void updateGrids() {
+        this.gridF1.updateGrid();
+        if (this.gridF2 != null) this.gridF2.updateGrid();
     }
 
     public Viaje(Bus bus, String origen, String destino, LocalDateTime fechaInicio) {
@@ -40,8 +52,13 @@ public class Viaje {
         this.origen = origen;
         this.destino = destino;
         this.fechaInicio = fechaInicio;
-        inicializarPiso(bus, 1);
-        if (bus.get_2F_structure() != null) inicializarPiso(bus, 2);
+        this.inicializarPiso(bus, 1);
+        this.gridF1 = new GridBus(this, 1);
+        if (bus.get_2F_structure() != null) {
+            this.inicializarPiso(bus, 2);
+            this.gridF2 = new GridBus(this, 2);
+        }
+        this.panelViaje = new PanelBus(this);
     }
     public Bus getBus() {return bus;}
     public String getOrigen() {return origen;}
@@ -59,7 +76,7 @@ public class Viaje {
     public void cambiarEstadoAsiento(int piso, int row, int col, EstadoAsiento estado) {
         Asiento[][] asientos = (piso == 2) ? this.asientosF2 : this.asientosF1;
         asientos[row][col].cambiarEstado(estado);
-        if (this.grid != null) this.grid.updateGrid();
+        this.updateGrids();
     }
 
     // Lista es una lista del tipo lista[n][2], cuya primera dimensión es un array que contiene arrays de longitud 2 con la fila y columna, en orden.

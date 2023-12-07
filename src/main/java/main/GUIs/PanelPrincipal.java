@@ -5,16 +5,31 @@ import main.Buses.BusDirector;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class PanelPrincipal extends JPanel {
     private CardLayout cardLayout;
     private JPanel panelInicio;
-    private JPanel panelBuses;
+    private Panel2 panelBuses;
     private JPanel panelAsientos;
     private Bus[] flota;
     private Viaje[] viajes;
+
+    public void updateBuses(String origen, String destino, LocalDate fecha) {
+        ArrayList<Viaje> localviajes = new ArrayList<>();
+        for (Viaje viaje : viajes) {
+            if (viaje.getOrigen().equals(origen) && viaje.getDestino().equals(destino) && viaje.getFechaInicio().toLocalDate().isEqual(fecha)) localviajes.add(viaje);
+        }
+        PanelBus[] paneles = new PanelBus[localviajes.size()];
+        for (int i = 0; i < localviajes.size(); i++) {
+            Viaje viaje = localviajes.remove(0);
+            paneles[i] = viaje.getPanel();
+        }
+        panelBuses.updateBuses(paneles);
+    }
     private void inicializarFlota() {
         BusDirector director = new BusDirector();
         this.flota = new Bus[3];
@@ -26,7 +41,6 @@ public class PanelPrincipal extends JPanel {
         LocalDateTime tiempobus1 = LocalDateTime.of(2023, 12, 8, 6, 0);
         Viaje viaje1 = new Viaje(this.flota[0], "Concepción", "Santiago", tiempobus1);
         Viaje viaje2 = new Viaje(this.flota[0], "Santiago", "Concepción", tiempobus1.plusHours(6));
-
         this.viajes = new Viaje[] {viaje1, viaje2};
     }
     public PanelPrincipal() {

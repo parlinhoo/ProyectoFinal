@@ -6,6 +6,7 @@ import main.GUIs.Viaje;
 
 import javax.swing.*;
 import javax.swing.plaf.PanelUI;
+import java.time.LocalDateTime;
 
 public class BusBuilder {
     private Bus bus;
@@ -78,7 +79,7 @@ class test {
         }
         JFrame ventana = new JFrame("anashe");
         ventana.setLayout(null);
-        Viaje viaje = new Viaje(bus, "a", "a", "a");
+        Viaje viaje = new Viaje(bus, "a", "a", LocalDateTime.now());
         viaje.cambiarEstadoAsientosMult(1, new int[][]{{0, 0}, {0, 1}}, EstadoAsiento.RESERVADO);
         GridBus grid = new GridBus(viaje, 1);
         grid.setVisible(true);
