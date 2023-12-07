@@ -35,22 +35,8 @@ public class Panel2 extends JPanel {
             }
         };
 
-        JPanel contenedorBuses = new JPanel(){
-            {
-                setLayout(new GridLayout(0,1,0 ,10));
-                int buses = 0;
-                for (int i=1; i<3; i++){
-                    add(new PanelBus(i));
-                    buses++;
-                    if(i == 2){
-                        i = 0;
-                    }
-                    if (buses == 15){
-                        break;
-                    }
-                }
-            }
-        };
+        JPanel contenedorBuses = new JPanel();
+        contenedorBuses.setLayout(new GridLayout(0,1,0 ,10));
 
         JScrollPane scrollPane = new JScrollPane(contenedorBuses);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

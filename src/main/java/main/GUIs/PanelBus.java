@@ -78,7 +78,7 @@ class test {
     public static void main(String[] args) {
         JFrame v = new JFrame();
         v.add(new PanelBus(1));
-        v.setDefaultCloseOperation(3);
+        v.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         v.setSize(1000, 800);
         v.setVisible(true);
     }

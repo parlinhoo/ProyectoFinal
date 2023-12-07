@@ -5,12 +5,14 @@ import main.Enums.Espacio;
 import main.Enums.EstadoAsiento;
 
 import javax.swing.*;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Viaje {
     private final Bus bus;
     private final String origen;
     private final String destino;
-    private final String horaInicio;
+    private final LocalDateTime fechaInicio;
 
     private GridBus grid;
 
@@ -33,18 +35,18 @@ public class Viaje {
         this.grid = grid;
     }
 
-    public Viaje(Bus bus, String origen, String destino, String horaInicio) {
+    public Viaje(Bus bus, String origen, String destino, LocalDateTime fechaInicio) {
         this.bus = bus;
         this.origen = origen;
         this.destino = destino;
-        this.horaInicio = horaInicio;
+        this.fechaInicio = fechaInicio;
         inicializarPiso(bus, 1);
         if (bus.get_2F_structure() != null) inicializarPiso(bus, 2);
     }
     public Bus getBus() {return bus;}
     public String getOrigen() {return origen;}
     public String getDestino() {return destino;}
-    public String getHoraInicio() {return horaInicio;}
+    public LocalDateTime getFechaInicio() {return fechaInicio;}
 
     public Asiento[][] getAsientosF1() {
         return asientosF1;
@@ -65,14 +67,5 @@ public class Viaje {
         for (int[] posAsiento : lista) {
             cambiarEstadoAsiento(piso, posAsiento[0], posAsiento[1], estado);
         }
-    }
-
-    public static void main(String[] args) {
-        BusBuilder builder = new BusBuilder();
-        builder.reset();
-        builder.set1FSize(5, 8);
-        builder.addObjRect(1, 0, 0, 8, 2, Espacio.SEMICAMA);
-        builder.addObjRect(1, 3, 0, 8, 2, Espacio.SALONCAMA);
-        Viaje viaje = new Viaje(builder.getBus(), "", "", "");
     }
 }

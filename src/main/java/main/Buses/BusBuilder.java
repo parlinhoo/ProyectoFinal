@@ -5,6 +5,7 @@ import main.Enums.EstadoAsiento;
 import main.GUIs.Viaje;
 
 import javax.swing.*;
+import javax.swing.plaf.PanelUI;
 
 public class BusBuilder {
     private Bus bus;
