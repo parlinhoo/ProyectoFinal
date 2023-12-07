@@ -44,18 +44,20 @@ public class Panel1 extends JPanel {
         day.setFont(new Font(fontName, Font.PLAIN, fontSize));
         this.add(day);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(2023, Calendar.NOVEMBER, 29);
-        Date min = calendar.getTime();
-        calendar.set(2024, Calendar.DECEMBER, 30);
-        Date max = calendar.getTime();
         Date hoy = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -1);
+        Date min = calendar.getTime();
+        calendar.set(2024, Calendar.DECEMBER, 31);
+        Date max = calendar.getTime();
+
         SpinnerDateModel dateModel = new SpinnerDateModel(hoy, min, max, Calendar.DAY_OF_MONTH);
-        JSpinner dateSpinner = new JSpinner(dateModel);
-        JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dateSpinner, "dd/MM/yyyy");
-        dateSpinner.setEditor(dateEditor);
-        dateSpinner.setBounds(comboBoxDestino.getX() + comboBoxWidth + gapX, y, comboBoxWidth, comboBoxHeight);
-        this.add(dateSpinner);
+        JSpinner datePicker = new JSpinner(dateModel);
+
+        JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(datePicker, "dd/MM/yyyy");
+        datePicker.setEditor(dateEditor);
+        datePicker.setBounds(comboBoxDestino.getX() + comboBoxWidth + gapX, y, comboBoxWidth, comboBoxHeight);
+        this.add(datePicker);
 
         JButton BuscarBusesButton = new JButton("Buscar buses");
         BuscarBusesButton.setBounds(400, 450, 150, 50);
