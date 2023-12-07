@@ -24,9 +24,19 @@ public class Bus {
         switch (floor) {
             case 1 -> {
                 this.F1structure = new Espacio[width][length];
+                for (int i = 0; i < this.F1structure.length; i++) {
+                    for (int j = 0; j < this.F1structure[0].length; j++) {
+                        this.F1structure[i][j] = Espacio.VACIO;
+                    }
+                }
             }
             case 2 -> {
                 this.F2structure = new Espacio[width][length];
+                for (int i = 0; i < this.F1structure.length; i++) {
+                    for (int j = 0; j < this.F1structure[0].length; j++) {
+                        this.F1structure[i][j] = Espacio.VACIO;
+                    }
+                }
             }
         }
     }
