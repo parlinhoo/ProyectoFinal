@@ -2,6 +2,8 @@ package main.GUIs;
 
 import main.Buses.Bus;
 import main.Buses.BusDirector;
+import main.Buses.GridBus;
+import main.Ventana;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +16,7 @@ public class PanelPrincipal extends JPanel {
     private CardLayout cardLayout;
     private JPanel panelInicio;
     private Panel2 panelBuses;
-    private JPanel panelAsientos;
+    private Panel3 panelAsientos;
     private Bus[] flota;
     private Viaje[] viajes;
 
@@ -37,6 +39,14 @@ public class PanelPrincipal extends JPanel {
             flota[i] = director.semicama_comun1F();
         }
     }
+    public void showGrid(Viaje viaje, int floor) {
+        GridBus grid = viaje.getGrid(floor);
+        this.panelAsientos.gridPanel.removeAll();
+        this.panelAsientos.gridPanel.add(grid, BorderLayout.CENTER);
+        this.cardLayout.show(this, "panelAsientos");
+        grid.setLocation((int) (Ventana.anchura*0.25) - (int) (grid.getWidth()*0.5), (int) (Ventana.altura*0.5) - (int) (grid.getHeight()*0.5));
+
+    }
     private void crearViajes() {
         LocalDateTime tiempobus1 = LocalDateTime.of(2023, 12, 8, 6, 0);
         Viaje viaje1 = new Viaje(this.flota[0], "Concepción", "Santiago", tiempobus1);
@@ -54,5 +64,7 @@ public class PanelPrincipal extends JPanel {
         this.add(panelInicio, "panelInicio");
         this.add(panelBuses, "panelBuses");
         this.add(panelAsientos, "panelAsientos");
+        cardLayout.show(this, "panelAsientos");
+        showGrid(this.viajes[0], 1);
     }
 }

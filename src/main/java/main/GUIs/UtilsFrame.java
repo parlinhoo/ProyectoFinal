@@ -21,13 +21,13 @@ public class UtilsFrame {
     }
 
     public static void boundsPorcentual(Container frame, double posX, double posY, double sizeX, double sizeY) {
-        UtilsFrame.posicionPorcentual(frame, posX, posY);
         UtilsFrame.tamanoPorcentual(frame, sizeX, sizeY);
+        UtilsFrame.posicionPorcentual(frame, posX, posY);
     }
 
     public static void boundsPorcentual(Container frame, Container parent, double posX, double posY, double sizeX, double sizeY) {
-        UtilsFrame.posicionPorcentual(frame, parent, posX, posY);
         UtilsFrame.tamanoPorcentual(frame, parent, sizeX, sizeY);
+        UtilsFrame.posicionPorcentual(frame, parent, posX, posY);
     }
 
     public static void moverConCentroAnchorPoint(Container frame, double anchorPointX, double anchorPointY, int posX, int posY) {

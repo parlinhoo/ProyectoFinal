@@ -38,6 +38,9 @@ public class Viaje {
         if (piso == 2) this.gridF2 = grid;
         else this.gridF1 = grid;
     }
+    public GridBus getGrid(int piso) {
+        return (piso == 2) ? this.gridF2 : this.gridF1;
+    }
     public PanelBus getPanel() {
         return this.panelViaje;
     }

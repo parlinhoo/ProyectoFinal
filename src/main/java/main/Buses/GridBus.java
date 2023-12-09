@@ -6,6 +6,7 @@ import main.GUIs.Viaje;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -42,6 +43,10 @@ public class GridBus extends JPanel {
         this.grid = new JButton[buswidth][buslength];
         this.setSize(buswidth*spacewidth, buslength*spaceheight);
         this.setLayout(new GridLayout(buslength, buswidth));
+
+        Color bgcolor = new Color(0x9B9B9B);
+        this.setBackground(bgcolor);
+        this.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.BLACK, Color.BLACK));
         for (int j = buslength-1; j >= 0; j--) {
             for (int i = 0; i < buswidth; i++) {
                 JButton frame = new JButton();
@@ -52,8 +57,7 @@ public class GridBus extends JPanel {
                 } catch (Exception e) {
                     System.out.printf("AAAAAAAAAAAAAAAAAAAAAAAAA: %s\n", e.getMessage());
                 }
-                this.setBackground(Color.WHITE);
-                frame.setBackground(Color.WHITE);
+                frame.setBackground(bgcolor);
                 frame.setBorderPainted(false);
                 frame.setFocusPainted(false);
                 frame.setContentAreaFilled(asientos[i][j].tipo().IsASeat() && asientos[i][j].estado() != EstadoAsiento.RESERVADO);

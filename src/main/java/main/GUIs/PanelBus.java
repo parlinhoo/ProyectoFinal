@@ -16,7 +16,6 @@ public class PanelBus extends JPanel {
     private JLabel precioLabel;
     private JLabel asientosLabel;
     private JLabel disponiblesLabel;
-
     private Viaje viaje;
 
     public void updateSeats() {
