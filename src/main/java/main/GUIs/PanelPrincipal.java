@@ -27,7 +27,7 @@ public class PanelPrincipal extends JPanel {
         }
         PanelBus[] paneles = new PanelBus[localviajes.size()];
         for (int i = 0; i < localviajes.size(); i++) {
-            Viaje viaje = localviajes.remove(0);
+            Viaje viaje = localviajes.get(i);
             paneles[i] = viaje.getPanel();
         }
         panelBuses.updateBuses(paneles);
@@ -39,19 +39,20 @@ public class PanelPrincipal extends JPanel {
             flota[i] = director.semicama_comun1F();
         }
     }
-    public void showGrid(Viaje viaje, int floor) {
-        GridBus grid = viaje.getGrid(floor);
-        this.panelAsientos.gridPanel.removeAll();
-        this.panelAsientos.gridPanel.add(grid, BorderLayout.CENTER);
-        this.cardLayout.show(this, "panelAsientos");
-        grid.setLocation((int) (Ventana.anchura*0.25) - (int) (grid.getWidth()*0.5), (int) (Ventana.altura*0.5) - (int) (grid.getHeight()*0.5));
-
-    }
     private void crearViajes() {
-        LocalDateTime tiempobus1 = LocalDateTime.of(2023, 12, 8, 6, 0);
+        LocalDateTime tiempobus1 = LocalDateTime.of(2023, 12, 9, 6, 0);
+        LocalDateTime tiempobus2 = LocalDateTime.of(2023, 12, 9, 9, 0);
+        LocalDateTime tiempobus3 = LocalDateTime.of(2023, 12, 9, 12, 0);
         Viaje viaje1 = new Viaje(this.flota[0], "Concepción", "Santiago", tiempobus1);
         Viaje viaje2 = new Viaje(this.flota[0], "Santiago", "Concepción", tiempobus1.plusHours(6));
-        this.viajes = new Viaje[] {viaje1, viaje2};
+        Viaje viaje3 = new Viaje(this.flota[0], "Concepción", "Santiago", tiempobus1.plusHours(12));
+        Viaje viaje4 = new Viaje(this.flota[1], "Concepción", "Santiago", tiempobus2);
+        Viaje viaje5 = new Viaje(this.flota[1], "Santiago", "Concepción", tiempobus2.plusHours(6));
+        Viaje viaje6 = new Viaje(this.flota[1], "Concepción", "Santiago", tiempobus2.plusHours(12));
+        Viaje viaje7 = new Viaje(this.flota[2], "Concepción", "Santiago", tiempobus3);
+        Viaje viaje8 = new Viaje(this.flota[2], "Santiago", "Concepción", tiempobus3.plusHours(6));
+        Viaje viaje9 = new Viaje(this.flota[2], "Concepción", "Santiago", tiempobus3.plusHours(12));
+        this.viajes = new Viaje[] {viaje1, viaje2, viaje3, viaje4, viaje5, viaje6, viaje7, viaje8, viaje9};
     }
     public PanelPrincipal() {
         this.inicializarFlota();
@@ -60,11 +61,7 @@ public class PanelPrincipal extends JPanel {
         this.setLayout(cardLayout);
         this.panelInicio = new Panel1(this, cardLayout);
         this.panelBuses = new Panel2(this, cardLayout);
-        this.panelAsientos = new Panel3();
         this.add(panelInicio, "panelInicio");
         this.add(panelBuses, "panelBuses");
-        this.add(panelAsientos, "panelAsientos");
-        cardLayout.show(this, "panelAsientos");
-        showGrid(this.viajes[0], 1);
     }
 }
