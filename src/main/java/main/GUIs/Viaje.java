@@ -47,6 +47,7 @@ public class Viaje {
 
     private void updateGrids() {
         this.gridF1.updateGrid();
+        this.panelViaje.updateSeats();
         if (this.gridF2 != null) this.gridF2.updateGrid();
     }
 

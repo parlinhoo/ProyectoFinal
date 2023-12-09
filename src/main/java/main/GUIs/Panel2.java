@@ -6,7 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Panel2 extends JPanel {
-
+    private JPanel contenedor;
     private JPanel panelPrincipal;
     private JPanel contenedorBuses;
     private CardLayout cardLayout;
@@ -14,7 +14,7 @@ public class Panel2 extends JPanel {
     public void updateBuses(PanelBus[] buses) {
         this.contenedorBuses.removeAll();
         for (PanelBus panel : buses) {
-            if (panel != null){
+            if (panel != null) {
                 panel.updateSeats();
             }
             panel.addMouseListener(new MouseAdapter() {

@@ -1,6 +1,7 @@
 package main.GUIs;
 
 import main.Buses.GridBus;
+import main.Ventana;
 
 import javax.swing.*;
 import java.awt.*;
@@ -44,7 +45,7 @@ public class Panel3 extends JPanel {
                 setBackground(Color.WHITE);
                 setLayout(null);
                 GridBus gridBus = new GridBus(viaje, tipo);
-                gridBus.setBounds(30, 30, 400, 600);
+                gridBus.setLocation((int) (Ventana.anchura*0.25) - (int) (gridBus.getWidth()*0.5), (int) (Ventana.altura*0.5) - (int) (gridBus.getHeight()*0.6));
                 JButton comprar = new JButton("Confirmar Pago");
                 comprar.addActionListener(e -> gridBus.PagarAsientosSeleccionados());
                 comprar.setBounds(550, 500, 300, 50);

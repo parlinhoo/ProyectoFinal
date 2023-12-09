@@ -11,8 +11,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class GridBus extends JPanel {
-    private final static int spacewidth = 50;
-    private final static int spaceheight = 50;
+    private final static int spacewidth = 55;
+    private final static int spaceheight = 55;
     private final Viaje viaje;
     private final int piso;
     private JButton[][] grid;
