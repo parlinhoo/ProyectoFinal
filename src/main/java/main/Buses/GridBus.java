@@ -1,6 +1,5 @@
 package main.Buses;
 
-import main.Enums.Espacio;
 import main.Enums.EstadoAsiento;
 import main.GUIs.Viaje;
 
@@ -16,6 +15,18 @@ public class GridBus extends JPanel {
     private final Viaje viaje;
     private final int piso;
     private JButton[][] grid;
+
+    public void PagarAsientosSeleccionados() {
+        Asiento[][] asientos = this.viaje.getAsientosF1();
+        for (int j = this.grid[0].length - 1; j >= 0; j--) {
+            for (int i = 0; i < this.grid.length; i++) {
+                Asiento asiento = asientos[i][j];
+                if (asiento.estado() == EstadoAsiento.SELECCIONADO) {
+                    viaje.cambiarEstadoAsiento(1, i, j, EstadoAsiento.RESERVADO);
+                }
+            }
+        }
+    }
 
     public void updateGrid() {
         Asiento[][] asientos = (this.piso == 2) ? this.viaje.getAsientosF2() : this.viaje.getAsientosF1();
@@ -52,8 +63,8 @@ public class GridBus extends JPanel {
                 } catch (Exception e) {
                     System.out.printf("AAAAAAAAAAAAAAAAAAAAAAAAA: %s\n", e.getMessage());
                 }
-                this.setBackground(Color.WHITE);
-                frame.setBackground(Color.WHITE);
+                this.setBackground(new Color(0xEEEEEE));
+                frame.setBackground(new Color(0xEEEEEE));
                 frame.setBorderPainted(false);
                 frame.setFocusPainted(false);
                 frame.setContentAreaFilled(asientos[i][j].tipo().IsASeat() && asientos[i][j].estado() != EstadoAsiento.RESERVADO);

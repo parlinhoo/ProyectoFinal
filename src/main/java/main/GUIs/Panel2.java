@@ -2,20 +2,37 @@ package main.GUIs;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Panel2 extends JPanel {
 
-    private JPanel contenedor;
+    private JPanel panelPrincipal;
+    private JPanel contenedorBuses;
+    private CardLayout cardLayout;
 
     public void updateBuses(PanelBus[] buses) {
-        this.contenedor.removeAll();
+        this.contenedorBuses.removeAll();
         for (PanelBus panel : buses) {
-            panel.updateSeats();
-            this.contenedor.add(panel);
+            if (panel != null){
+                panel.updateSeats();
+            }
+            panel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent me) {
+                    JPanel panelAsientos = new Panel3(panel.getViaje(), panelPrincipal, cardLayout);
+                    panelPrincipal.add(panelAsientos, "panelAsientos");
+                    cardLayout.show(panelPrincipal, "panelAsientos");
+                }
+            });
+            this.contenedorBuses.add(panel);
         }
+        this.contenedorBuses.add(Box.createVerticalGlue());
     }
 
-    public Panel2(JPanel panel, CardLayout cardLayout) {
+    public Panel2(JPanel panelPrincipal, CardLayout cardLayout) {
+        this.panelPrincipal = panelPrincipal;
+        this.cardLayout = cardLayout;
         this.setBackground(Color.WHITE);
         this.setLayout(new BorderLayout());
 
@@ -34,7 +51,7 @@ public class Panel2 extends JPanel {
                 JButton volverButton = new JButton();
                 volverButton.setPreferredSize(new Dimension(50, 30));
                 volverButton.setIcon(new ImageIcon("src/main/resources/return.png"));
-                volverButton.addActionListener(e -> cardLayout.show(panel, "panelInicio"));
+                volverButton.addActionListener(e -> cardLayout.show(panelPrincipal, "panelInicio"));
                 add(volverButton, gbc);
 
                 gbc.anchor = GridBagConstraints.CENTER;
@@ -46,8 +63,9 @@ public class Panel2 extends JPanel {
         };
 
         JPanel contenedorBuses = new JPanel();
-        this.contenedor = contenedorBuses;
-        contenedorBuses.setLayout(new GridLayout(0,1,0 ,10));
+        contenedorBuses.setLayout(new BoxLayout(contenedorBuses, BoxLayout.Y_AXIS));
+        contenedorBuses.setBackground(Color.WHITE);
+        this.contenedorBuses = contenedorBuses;
 
         JScrollPane scrollPane = new JScrollPane(contenedorBuses);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

@@ -40,6 +40,8 @@ public class PanelBus extends JPanel {
         disponiblesLabel.setText((viaje.getAsientosF2() != null) ? String.format("%d (1F: %d | 2F: %d)", asientosDisponibles, asientosDisponibles-asientos2doPiso, asientos2doPiso) : String.valueOf(asientosDisponibles));
     }
 
+    public Viaje getViaje() {return viaje;}
+
     public PanelBus(Viaje viaje) {
         this.viaje = viaje;
         Bus bus = viaje.getBus();
@@ -70,7 +72,7 @@ public class PanelBus extends JPanel {
         }
 
         this.setLayout(null);
-        this.setBackground(new Color(0xD9D9D9));
+        this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(800,110));
         int x = 50;
         int y = 20;
@@ -80,7 +82,7 @@ public class PanelBus extends JPanel {
         try {
             BufferedImage myPicture = ImageIO.read(new File(String.format("src/main/resources/bus%d.png", tipo)));
             JLabel fotito = new JLabel(new ImageIcon(myPicture));
-            fotito.setBounds(x, 10, 100, 100);
+            fotito.setBounds(x, this.getY()/2, 100, 100);
             this.add(fotito);
         } catch (Exception e){
             System.out.println("?");

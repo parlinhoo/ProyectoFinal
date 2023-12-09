@@ -1,11 +1,8 @@
 package main.GUIs;
 
-import main.Enums.Distancia;
-
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
