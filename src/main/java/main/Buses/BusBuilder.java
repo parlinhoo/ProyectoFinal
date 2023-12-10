@@ -58,36 +58,3 @@ public class BusBuilder {
         }
     }
 }
-
-class test {
-    public static void main(String[] args) {
-        BusBuilder builder = new BusBuilder();
-        builder.reset();
-        builder.set1FSize(5, 10);
-        builder.addObjRect(1, 0, 0, 10, 5, Espacio.SEMICAMA);
-        builder.addObjRow(1, 0, Espacio.SEMICAMA);
-        builder.addObjRect(1, 4, 5, 2, 1, Espacio.EMERGENCIA);
-        builder.addObjRect(1, 3, 5, 2, 1, Espacio.VACIO);
-        builder.addObjRow(1, 2, Espacio.VACIO);
-        Bus bus = builder.getBus();
-        Espacio[][] sp = bus.get_1F_structure();
-        for (Espacio[] ar : sp) {
-            for (Espacio esp : ar) {
-                System.out.printf("%s ", esp == null ? "nada" : esp.name());
-            }
-            System.out.println();
-        }
-        JFrame ventana = new JFrame("anashe");
-        ventana.setLayout(null);
-        Viaje viaje = new Viaje(bus, "a", "a", LocalDateTime.now());
-        viaje.cambiarEstadoAsientosMult(1, new int[][]{{0, 0}, {0, 1}}, EstadoAsiento.RESERVADO);
-        GridBus grid = new GridBus(viaje, 1);
-        grid.setVisible(true);
-        ventana.add(grid);
-        ventana.pack();
-        ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        ventana.setSize(1000, 800);
-        ventana.setLocationRelativeTo(null);
-        ventana.setVisible(true);
-    }
-}

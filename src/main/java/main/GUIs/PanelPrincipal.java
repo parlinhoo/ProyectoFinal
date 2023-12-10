@@ -34,16 +34,17 @@ public class PanelPrincipal extends JPanel {
     }
     private void inicializarFlota() {
         BusDirector director = new BusDirector();
-        this.flota = new Bus[3];
+        this.flota = new Bus[4];
         flota[0] = director.semicama_2F();
         flota[1] = director.semicama_comun1F();
         flota[2] = director.semicama_2F();
-
+        flota[3] = director.mixto_comun_2F();
     }
     private void crearViajes() {
         LocalDateTime tiempobus1 = LocalDateTime.of(2023, 12, 10, 6, 0);
         LocalDateTime tiempobus2 = LocalDateTime.of(2023, 12, 10, 9, 0);
         LocalDateTime tiempobus3 = LocalDateTime.of(2023, 12, 10, 12, 0);
+        LocalDateTime tiempobus4 = LocalDateTime.of(2023, 12, 10, 16, 0);
         Viaje viaje1 = new Viaje(this.flota[0], "Concepción", "Santiago", tiempobus1);
         Viaje viaje2 = new Viaje(this.flota[0], "Santiago", "Concepción", tiempobus1.plusHours(6));
         Viaje viaje3 = new Viaje(this.flota[0], "Concepción", "Santiago", tiempobus1.plusHours(12));
@@ -53,7 +54,8 @@ public class PanelPrincipal extends JPanel {
         Viaje viaje7 = new Viaje(this.flota[2], "Concepción", "Santiago", tiempobus3);
         Viaje viaje8 = new Viaje(this.flota[2], "Santiago", "Concepción", tiempobus3.plusHours(6));
         Viaje viaje9 = new Viaje(this.flota[2], "Concepción", "Santiago", tiempobus3.plusHours(12));
-        this.viajes = new Viaje[] {viaje1, viaje4, viaje7, viaje2, viaje3, viaje5, viaje6, viaje8, viaje9};
+        Viaje viaje10 = new Viaje(this.flota[3], "Concepción", "Santiago", tiempobus4);
+        this.viajes = new Viaje[] {viaje1, viaje4, viaje7, viaje2, viaje3, viaje5, viaje6, viaje8, viaje9, viaje10};
     }
     public PanelPrincipal() {
         this.inicializarFlota();

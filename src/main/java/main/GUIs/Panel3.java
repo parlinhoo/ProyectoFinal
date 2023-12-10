@@ -8,6 +8,9 @@ import java.awt.*;
 
 public class Panel3 extends JPanel {
 
+    public JLabel asientosSeleccionadosp1;
+    public JLabel asientosSeleccionadosp2;
+
     public Panel3(Viaje viaje, JPanel panel, CardLayout cardLayout) {
         this.setLayout(new BorderLayout());
 
@@ -41,6 +44,8 @@ public class Panel3 extends JPanel {
 
         int tipo = (viaje.getBus().get_2F_structure() != null) ? 2 : 1;
 
+        Panel3 ref = this;
+
         JPanel menuCompra = new JPanel(){
             {
                 int x = 550;
@@ -54,10 +59,13 @@ public class Panel3 extends JPanel {
 
                 GridBus gridBus_1F = new GridBus(viaje, 1);
                 GridBus gridBus_2F;
-
+                gridBus_1F.linkPanel(ref);
                 switch (tipo) {
                     case 2:
                         gridBus_2F = new GridBus(viaje, 2);
+                        gridBus_2F.linkPanel(ref);
+                        gridBus_1F.floor = 1;
+                        gridBus_2F.floor = 2;
                         gridBus_1F.setLocation((int) (Ventana.anchura * 0.16) - (int) (gridBus_1F.getWidth() * 0.5), (int) (Ventana.altura * 0.47) - (int) (gridBus_1F.getHeight() * 0.6));
                         gridBus_2F.setLocation((int) (Ventana.anchura * 0.46) - (int) (gridBus_2F.getWidth() * 0.5), (int) (Ventana.altura * 0.47) - (int) (gridBus_2F.getHeight() * 0.6));
                         busname = "Bus de 2 pisos";
@@ -113,6 +121,22 @@ public class Panel3 extends JPanel {
                 cuantosAsientos.setBounds(x, hora.getY() + vgap, labelWidth, labelHeight);
                 this.add(cuantosAsientos);
 
+                JLabel asientosSel = new JLabel();
+                asientosSel.setFont(new Font("Lucida Sans", Font.PLAIN, fontSize/2));
+                asientosSel.setBounds(x, cuantosAsientos.getY() + vgap, labelWidth, labelHeight);
+                this.add(asientosSel);
+                asientosSeleccionadosp1 = asientosSel;
+
+                JLabel asientosSel2 = null;
+                if (tipo == 2) {
+                    asientosSel.setText("Piso 1:");
+                    asientosSel2 = new JLabel("Piso 2:");
+                    asientosSel2.setFont(new Font("Lucida Sans", Font.PLAIN, fontSize/2));
+                    asientosSel2.setBounds(x, asientosSel.getY() + vgap, labelWidth, labelHeight);
+                    asientosSeleccionadosp2 = asientosSel2;
+                    this.add(asientosSel2);
+                }
+
                 JButton comprar = new JButton("Confirmar Pago");
                 comprar.setFont(new Font("IMPACT", Font.PLAIN, 20));
                 comprar.setForeground(Color.WHITE);
@@ -123,7 +147,7 @@ public class Panel3 extends JPanel {
                         gridBus_2F.PagarAsientosSeleccionados();
                     }
                 });
-                comprar.setBounds(x, cuantosAsientos.getY() + vgap*3, 300, 50);
+                comprar.setBounds(x, asientosSel.getY() + vgap*4, 300, 50);
 
                 add(comprar);
                 add(gridBus_1F);
