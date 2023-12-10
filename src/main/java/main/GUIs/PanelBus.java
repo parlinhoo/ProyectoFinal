@@ -17,6 +17,7 @@ public class PanelBus extends JPanel {
     private JLabel asientosLabel;
     private JLabel disponiblesLabel;
     private Viaje viaje;
+    private int capacidad;
 
     public void updateSeats() {
         int asientosDisponibles = 0;
@@ -36,6 +37,13 @@ public class PanelBus extends JPanel {
                 }
             }
         }
+        Color colorLabel = new Color(0x079439);
+        if (asientosDisponibles>10 && asientosDisponibles<=(capacidad/2)){
+            colorLabel = new Color(0xD9BB02);
+        } else if (asientosDisponibles<=10) {
+            colorLabel = new Color(0x9B0606);
+        }
+        disponiblesLabel.setForeground(colorLabel);
         disponiblesLabel.setText((viaje.getAsientosF2() != null) ? String.format("%d (1F: %d | 2F: %d)", asientosDisponibles, asientosDisponibles-asientos2doPiso, asientos2doPiso) : String.valueOf(asientosDisponibles));
     }
 
@@ -69,14 +77,14 @@ public class PanelBus extends JPanel {
                 }
             }
         }
-
+        this.capacidad = capacidad;
         this.setLayout(null);
         this.setBackground(Color.WHITE);
         this.setPreferredSize(new Dimension(800,110));
         int x = 50;
         int y = 20;
         Color colorPrecio = new Color(0x079439);
-        Color colorDisponible = new Color(0x9B0606);
+        Color colorDisponible = new Color(0x079439);
 
         try {
             BufferedImage myPicture = ImageIO.read(new File(String.format("src/main/resources/bus%d.png", tipo)));
@@ -130,6 +138,11 @@ public class PanelBus extends JPanel {
         disponibles.setForeground(colorDisponible);
         disponibles.setBounds(asientos.getX() + 63, y + 25, 100, 40);
         this.add(disponibles);
+
+        JLabel hora = new JLabel("Parte a las " + String.valueOf(viaje.getFechaInicio().getHour()) + "hrs");
+        hora.setFont(new Font("Lucida Sans", Font.PLAIN, 15));
+        hora.setBounds(busInfo.getX(), y + 25, 200, 40);
+        this.add(hora);
     }
 
 }

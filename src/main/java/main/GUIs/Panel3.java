@@ -42,13 +42,63 @@ public class Panel3 extends JPanel {
 
         JPanel menuCompra = new JPanel(){
             {
+                int x = 550;
+                int vgap = 30;
+                int fontSize = 20;
+                int labelWidth = 300;
+                int labelHeight = 100;
                 setBackground(Color.WHITE);
                 setLayout(null);
                 GridBus gridBus = new GridBus(viaje, tipo);
                 gridBus.setLocation((int) (Ventana.anchura*0.25) - (int) (gridBus.getWidth()*0.5), (int) (Ventana.altura*0.5) - (int) (gridBus.getHeight()*0.6));
+
+                JLabel resumen = new JLabel("Resumen del Pedido");
+                resumen.setFont(new Font("IMPACT", Font.BOLD, 30));
+                resumen.setBounds(x, 150, 300, 100);
+                add(resumen);
+
+                String busname = null;
+                switch (tipo){
+                    case(1):
+                        busname = "Bus Tradicional";
+                        break;
+                    case(2):
+                        busname = "Bus de 2 pisos";
+                        break;
+                }
+
+                JLabel bus = new JLabel(String.format("<html><b>Tipo de bus:</b> %s<html>", busname));
+                bus.setFont(new Font("Lucida Sans", Font.PLAIN, fontSize));
+                bus.setBounds(x, resumen.getY() + vgap*2, labelWidth, labelHeight);
+                add(bus);
+
+                JLabel origen = new JLabel(String.format("<html><b>Desde:</b> %s", viaje.getOrigen()));
+                origen.setFont(new Font("Lucida Sans", Font.PLAIN, fontSize));
+                origen.setBounds(x, bus.getY() + vgap, labelWidth, labelHeight);
+                add(origen);
+
+                JLabel destino = new JLabel(String.format("<html><b>Hasta:</b> %s", viaje.getDestino()));
+                destino.setFont(new Font("Lucida Sans", Font.PLAIN, fontSize));
+                destino.setBounds(x, origen.getY() + vgap, labelWidth, labelHeight);
+                add(destino);
+
+                JLabel hora = new JLabel("Parte a las " + String.valueOf(viaje.getFechaInicio().getHour()) + "hrs");
+                hora.setFont(new Font("Lucida Sans", Font.PLAIN, fontSize));
+                hora.setBounds(x, destino.getY() + vgap, labelWidth, labelHeight);
+                this.add(hora);
+
+                JLabel cuantosAsientos = new JLabel("Asientos seleccionados: ");
+                cuantosAsientos.setFont(new Font("Lucida Sans", Font.PLAIN, fontSize));
+                cuantosAsientos.setBounds(x, hora.getY() + vgap, labelWidth, labelHeight);
+                this.add(cuantosAsientos);
+
                 JButton comprar = new JButton("Confirmar Pago");
+                comprar.setFont(new Font("IMPACT", Font.PLAIN, 20));
+                comprar.setForeground(Color.WHITE);
+                comprar.setBackground(Color.BLACK);
                 comprar.addActionListener(e -> gridBus.PagarAsientosSeleccionados());
-                comprar.setBounds(550, 500, 300, 50);
+                comprar.setBounds(550, cuantosAsientos.getY() + vgap*3, 300, 50);
+
                 add(comprar);
                 add(gridBus);
             }

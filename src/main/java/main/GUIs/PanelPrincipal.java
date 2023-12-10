@@ -40,9 +40,9 @@ public class PanelPrincipal extends JPanel {
         }
     }
     private void crearViajes() {
-        LocalDateTime tiempobus1 = LocalDateTime.of(2023, 12, 9, 6, 0);
-        LocalDateTime tiempobus2 = LocalDateTime.of(2023, 12, 9, 9, 0);
-        LocalDateTime tiempobus3 = LocalDateTime.of(2023, 12, 9, 12, 0);
+        LocalDateTime tiempobus1 = LocalDateTime.of(2023, 12, 10, 6, 0);
+        LocalDateTime tiempobus2 = LocalDateTime.of(2023, 12, 10, 9, 0);
+        LocalDateTime tiempobus3 = LocalDateTime.of(2023, 12, 10, 12, 0);
         Viaje viaje1 = new Viaje(this.flota[0], "Concepción", "Santiago", tiempobus1);
         Viaje viaje2 = new Viaje(this.flota[0], "Santiago", "Concepción", tiempobus1.plusHours(6));
         Viaje viaje3 = new Viaje(this.flota[0], "Concepción", "Santiago", tiempobus1.plusHours(12));
