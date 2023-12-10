@@ -53,7 +53,7 @@ public class PanelPrincipal extends JPanel {
         Viaje viaje7 = new Viaje(this.flota[2], "Concepción", "Santiago", tiempobus3);
         Viaje viaje8 = new Viaje(this.flota[2], "Santiago", "Concepción", tiempobus3.plusHours(6));
         Viaje viaje9 = new Viaje(this.flota[2], "Concepción", "Santiago", tiempobus3.plusHours(12));
-        this.viajes = new Viaje[] {viaje1, viaje2, viaje3, viaje4, viaje5, viaje6, viaje7, viaje8, viaje9};
+        this.viajes = new Viaje[] {viaje1, viaje4, viaje7, viaje2, viaje3, viaje5, viaje6, viaje8, viaje9};
     }
     public PanelPrincipal() {
         this.inicializarFlota();

@@ -25,6 +25,7 @@ public class Panel3 extends JPanel {
 
                 JButton volverButton = new JButton();
                 volverButton.setPreferredSize(new Dimension(50, 30));
+                volverButton.setBackground(Color.BLACK);
                 volverButton.setIcon(new ImageIcon("src/main/resources/return.png"));
                 volverButton.addActionListener(e -> cardLayout.show(panel, "panelBuses"));
                 add(volverButton, gbc);
