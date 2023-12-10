@@ -56,6 +56,7 @@ public class PanelBus extends JPanel {
         int capacidad = 0;
         int asientosDisponibles = 0;
         int asientos2doPiso = 0;
+
         for (Asiento[] row : viaje.getAsientosF1()) {
             for (Asiento espacio : row) {
                 if (espacio.tipo().IsASeat()) {
@@ -64,6 +65,7 @@ public class PanelBus extends JPanel {
                 }
             }
         }
+
         if (viaje.getAsientosF2() != null) {
             for (Asiento[] row : viaje.getAsientosF2()) {
                 for (Asiento espacio : row) {
@@ -77,6 +79,7 @@ public class PanelBus extends JPanel {
                 }
             }
         }
+
         this.capacidad = capacidad;
         this.setLayout(null);
         this.setBackground(Color.WHITE);
@@ -97,13 +100,16 @@ public class PanelBus extends JPanel {
 
         String busname = null;
         int precioPasaje = 15000;
+        int xDisponibles = 0;
 
         switch (tipo){
             case(1):
                 busname = "Bus Tradicional";
+                xDisponibles = 63;
                 break;
             case(2):
                 busname = "Bus de 2 pisos";
+                xDisponibles = 10;
                 break;
         }
 
@@ -136,7 +142,7 @@ public class PanelBus extends JPanel {
         this.disponiblesLabel = disponibles;
         disponibles.setFont(new Font("Lucida Sans", Font.BOLD, 15));
         disponibles.setForeground(colorDisponible);
-        disponibles.setBounds(asientos.getX() + 63, y + 25, 100, 40);
+        disponibles.setBounds(asientos.getX() + xDisponibles, y + 25, 200, 40);
         this.add(disponibles);
 
         JLabel hora = new JLabel("Parte a las " + String.valueOf(viaje.getFechaInicio().getHour()) + "hrs");

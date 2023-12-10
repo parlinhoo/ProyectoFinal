@@ -18,12 +18,12 @@ public class GridBus extends JPanel {
     private JButton[][] grid;
 
     public void PagarAsientosSeleccionados() {
-        Asiento[][] asientos = this.viaje.getAsientosF1();
+        Asiento[][] asientos = (this.piso == 2) ? this.viaje.getAsientosF2() : this.viaje.getAsientosF1();
         for (int j = this.grid[0].length - 1; j >= 0; j--) {
             for (int i = 0; i < this.grid.length; i++) {
                 Asiento asiento = asientos[i][j];
                 if (asiento.estado() == EstadoAsiento.SELECCIONADO) {
-                    viaje.cambiarEstadoAsiento(1, i, j, EstadoAsiento.RESERVADO);
+                    viaje.cambiarEstadoAsiento(piso, i, j, EstadoAsiento.RESERVADO);
                 }
             }
         }

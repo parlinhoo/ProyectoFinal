@@ -32,9 +32,9 @@ public class Bus {
             }
             case 2 -> {
                 this.F2structure = new Espacio[width][length];
-                for (int i = 0; i < this.F1structure.length; i++) {
-                    for (int j = 0; j < this.F1structure[0].length; j++) {
-                        this.F1structure[i][j] = Espacio.VACIO;
+                for (int i = 0; i < this.F2structure.length; i++) {
+                    for (int j = 0; j < this.F2structure[0].length; j++) {
+                        this.F2structure[i][j] = Espacio.VACIO;
                     }
                 }
             }

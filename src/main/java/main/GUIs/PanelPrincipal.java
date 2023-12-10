@@ -35,9 +35,10 @@ public class PanelPrincipal extends JPanel {
     private void inicializarFlota() {
         BusDirector director = new BusDirector();
         this.flota = new Bus[3];
-        for (int i = 0; i < flota.length; i++) {
-            flota[i] = director.semicama_comun1F();
-        }
+        flota[0] = director.semicama_2F();
+        flota[1] = director.semicama_comun1F();
+        flota[2] = director.semicama_2F();
+
     }
     private void crearViajes() {
         LocalDateTime tiempobus1 = LocalDateTime.of(2023, 12, 10, 6, 0);

@@ -47,25 +47,45 @@ public class Panel3 extends JPanel {
                 int fontSize = 20;
                 int labelWidth = 300;
                 int labelHeight = 100;
+                String busname = null;
                 setBackground(Color.WHITE);
                 setLayout(null);
-                GridBus gridBus = new GridBus(viaje, tipo);
-                gridBus.setLocation((int) (Ventana.anchura*0.25) - (int) (gridBus.getWidth()*0.5), (int) (Ventana.altura*0.5) - (int) (gridBus.getHeight()*0.6));
+
+                GridBus gridBus_1F = new GridBus(viaje, 1);
+                GridBus gridBus_2F;
+
+                switch (tipo) {
+                    case 2:
+                        gridBus_2F = new GridBus(viaje, 2);
+                        gridBus_1F.setLocation((int) (Ventana.anchura * 0.16) - (int) (gridBus_1F.getWidth() * 0.5), (int) (Ventana.altura * 0.47) - (int) (gridBus_1F.getHeight() * 0.6));
+                        gridBus_2F.setLocation((int) (Ventana.anchura * 0.46) - (int) (gridBus_2F.getWidth() * 0.5), (int) (Ventana.altura * 0.47) - (int) (gridBus_2F.getHeight() * 0.6));
+                        busname = "Bus de 2 pisos";
+                        x = 640;
+                        break;
+                    default:
+                        gridBus_2F = null;
+                        gridBus_1F.setLocation((int) (Ventana.anchura * 0.25) - (int) (gridBus_1F.getWidth() * 0.5), (int) (Ventana.altura * 0.5) - (int) (gridBus_1F.getHeight() * 0.6));
+                        busname = "Bus Tradicional";
+                        break;
+                }
+
+                JLabel piso1 = new JLabel("Piso 1");
+                piso1.setFont(new Font("IMPACT", Font.BOLD, 30));
+                piso1.setBounds(gridBus_1F.getX() + 100, gridBus_1F.getY() + (int) (gridBus_1F.getHeight() * 0.95), 300, 100);
+                add(piso1);
+
+                if (gridBus_2F != null){
+                    add(gridBus_2F);
+                    JLabel piso2 = new JLabel("Piso 2");
+                    piso2.setFont(new Font("IMPACT", Font.BOLD, 30));
+                    piso2.setBounds(gridBus_2F.getX() + 100, gridBus_2F.getY() + (int) (gridBus_2F.getHeight() * 0.95), 300, 100);
+                    add(piso2);
+                }
 
                 JLabel resumen = new JLabel("Resumen del Pedido");
                 resumen.setFont(new Font("IMPACT", Font.BOLD, 30));
                 resumen.setBounds(x, 150, 300, 100);
                 add(resumen);
-
-                String busname = null;
-                switch (tipo){
-                    case(1):
-                        busname = "Bus Tradicional";
-                        break;
-                    case(2):
-                        busname = "Bus de 2 pisos";
-                        break;
-                }
 
                 JLabel bus = new JLabel(String.format("<html><b>Tipo de bus:</b> %s<html>", busname));
                 bus.setFont(new Font("Lucida Sans", Font.PLAIN, fontSize));
@@ -96,14 +116,19 @@ public class Panel3 extends JPanel {
                 comprar.setFont(new Font("IMPACT", Font.PLAIN, 20));
                 comprar.setForeground(Color.WHITE);
                 comprar.setBackground(Color.BLACK);
-                comprar.addActionListener(e -> gridBus.PagarAsientosSeleccionados());
-                comprar.setBounds(550, cuantosAsientos.getY() + vgap*3, 300, 50);
+                comprar.addActionListener(e -> {
+                    gridBus_1F.PagarAsientosSeleccionados();
+                    if (gridBus_2F != null){
+                        gridBus_2F.PagarAsientosSeleccionados();
+                    }
+                });
+                comprar.setBounds(x, cuantosAsientos.getY() + vgap*3, 300, 50);
 
                 add(comprar);
-                add(gridBus);
+                add(gridBus_1F);
+
             }
         };
-
         this.add(menuCompra, BorderLayout.CENTER);
     }
 }
