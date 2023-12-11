@@ -10,15 +10,27 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+/**
+ * Panel que resume la información de un viaje, con el tipo de bus y los asientos disponibles
+ */
 public class PanelBus extends JPanel {
+
+    /** Label asociado al nombre y a la capacidad del bus */
     private JLabel busInfoLabel;
+    /** Label asociado al número de pasajes disponibles */
     private JLabel pasajesLabel;
+    /** Label asociado al precio de los pasajes */
     private JLabel precioLabel;
+    /** Label asociado a los asientos disponibles */
     private JLabel asientosLabel;
+    /** Label asociado al número de asientos disponibles */
     private JLabel disponiblesLabel;
+    /** Viaje asociado, seleccionado previamente */
     private Viaje viaje;
+    /** Capacidad total del bus asociado */
     private int capacidad;
 
+    /** Permite actualizar la cantidad de los asientos y las características del label asociado  */
     public void updateSeats() {
         int asientosDisponibles = 0;
         int asientos2doPiso = 0;
@@ -47,8 +59,16 @@ public class PanelBus extends JPanel {
         disponiblesLabel.setText((viaje.getAsientosF2() != null) ? String.format("%d (1F: %d | 2F: %d)", asientosDisponibles, asientosDisponibles-asientos2doPiso, asientos2doPiso) : String.valueOf(asientosDisponibles));
     }
 
+    /**
+     * Getter del viaje asociado
+     * @return viaje asociado al panel
+     */
     public Viaje getViaje() {return viaje;}
 
+    /**
+     * Constructor del panel, define las características de los labels y el icono del bus asociado
+     * @param viaje Viaje del cual se muestran los asientos
+     */
     public PanelBus(Viaje viaje) {
         this.viaje = viaje;
         Bus bus = viaje.getBus();

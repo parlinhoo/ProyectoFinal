@@ -2,24 +2,36 @@ package main.GUIs;
 
 import main.Buses.Bus;
 import main.Buses.BusDirector;
-import main.Buses.GridBus;
-import main.Ventana;
 
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
+/**
+ * Panel contenedor de los demás paneles de la interfaz
+ */
 public class PanelPrincipal extends JPanel {
+
+    /** Permite cambiar entre los distintos paneles de la interfaz */
     private CardLayout cardLayout;
+    /** Primer panel a mostrar */
     private JPanel panelInicio;
+    /** Segundo panel a mostrar */
     private Panel2 panelBuses;
+    /** Tercer panel a mostrar */
     private Panel3 panelAsientos;
+    /** Flota de buses disponibles en el programa */
     private Bus[] flota;
+    /** Array de viajes disponibles en el programa */
     private Viaje[] viajes;
 
+    /** Permite actualizar y relacionar los viajes elegidos por el usuario con los disponibles
+     * @param origen Origen elegido por el usuario
+     * @param destino Destino elegido por el usuario
+     * @param fecha Fecha elegida por el usuario
+     */
     public void updateBuses(String origen, String destino, LocalDate fecha) {
         ArrayList<Viaje> localviajes = new ArrayList<>();
         for (Viaje viaje : viajes) {
@@ -32,6 +44,10 @@ public class PanelPrincipal extends JPanel {
         }
         panelBuses.updateBuses(paneles);
     }
+
+    /** Permite inicializar la flota de buses, creando los buses mediante BusDirector
+     * @see BusDirector
+     */
     private void inicializarFlota() {
         BusDirector director = new BusDirector();
         this.flota = new Bus[4];
@@ -40,6 +56,10 @@ public class PanelPrincipal extends JPanel {
         flota[2] = director.semicama_2F();
         flota[3] = director.mixto_comun_2F();
     }
+
+    /** Permite inicializar los viajes
+     * @see Viaje
+     */
     private void crearViajes() {
         LocalDateTime tiempobus1 = LocalDateTime.of(2023, 12, 10, 6, 0);
         LocalDateTime tiempobus2 = LocalDateTime.of(2023, 12, 10, 9, 0);
@@ -57,6 +77,10 @@ public class PanelPrincipal extends JPanel {
         Viaje viaje10 = new Viaje(this.flota[3], "Concepción", "Santiago", tiempobus4);
         this.viajes = new Viaje[] {viaje1, viaje4, viaje7, viaje2, viaje3, viaje5, viaje6, viaje8, viaje9, viaje10};
     }
+
+    /**
+     * Constructor del panel por defecto, inicializa la flota y crea los viajes, al igual que organizar el cardlayout
+     */
     public PanelPrincipal() {
         this.inicializarFlota();
         this.crearViajes();
