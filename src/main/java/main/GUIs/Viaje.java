@@ -1,12 +1,12 @@
 package main.GUIs;
 
-import main.Buses.*;
+import main.Buses.Asiento;
+import main.Buses.Bus;
 import main.Enums.Espacio;
 import main.Enums.EstadoAsiento;
+import main.Buses.GridBus;
 
-import javax.swing.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Viaje {
     private final Bus bus;

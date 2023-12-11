@@ -2,15 +2,12 @@ package main.GUIs;
 
 import main.Buses.Bus;
 import main.Buses.BusDirector;
-import main.Buses.GridBus;
-import main.Ventana;
 
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class PanelPrincipal extends JPanel {
     private CardLayout cardLayout;
