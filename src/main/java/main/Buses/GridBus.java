@@ -12,25 +12,53 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 
+/** Permite ver un piso del bus */
 public class GridBus extends JPanel {
+
+    /** Define el ancho del panel */
     private final static int spacewidth = 40;
+
+    /** Define el largo del panel */
     private final static int spaceheight = 40;
+
+    /** Viaje al que pertenece el bus a mostrar */
     private final Viaje viaje;
+
+    /** Define el piso a mostrar */
     private final int piso;
+
+    /** Matriz que permite que cada asiento sea seleccinable */
     private JButton[][] grid;
+
+    /** Conjunto de Strings que refleja los asientos selccionados en todo momento */
     private String[] selectedSeats;
+
+    /** Panel Asociado al Grid para mostrar los asientos seleccionados */
     private Panel3 linkedPanel;
+
+    /** Piso al que mostrar los asientos seleccionados */
     public int floor = 0;
 
+    /** Letras que determinan la columna de asinetos del piso */
+    private static String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
+
+    /**
+     * Entrega el conjunto de los asientos seleccionados
+     * @return Conjunto de Strings que representan los asientos seleccionados
+     */
     public String[] getSelectedSeats() {
         return this.selectedSeats;
     }
+
+    /**
+     * Setter del linkedPanel
+     * @param panel Panel3 asociado par mostrar los asientos
+     */
     public void linkPanel(Panel3 panel) {
         this.linkedPanel = panel;
     }
 
-    private static String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
-
+    /** Permite pagar los asientos seleccionados cambiando su estado de SELECCIONADO a RESERVADO */
     public void PagarAsientosSeleccionados() {
         Asiento[][] asientos = (this.piso == 2) ? this.viaje.getAsientosF2() : this.viaje.getAsientosF1();
         for (int j = this.grid[0].length - 1; j >= 0; j--) {
@@ -43,6 +71,7 @@ public class GridBus extends JPanel {
         }
     }
 
+    /** Permite actualizar el Grid */
     public void updateGrid() {
         Asiento[][] asientos = (this.piso == 2) ? this.viaje.getAsientosF2() : this.viaje.getAsientosF1();
         ArrayList<String> sel = new ArrayList<>();
@@ -75,7 +104,7 @@ public class GridBus extends JPanel {
                 seats += this.selectedSeats[i];
             }
         }
-        //xd tuve que hardcodearlo
+
         if (this.linkedPanel != null) {
             switch (this.floor) {
                 case 0 -> {
@@ -90,6 +119,12 @@ public class GridBus extends JPanel {
             }
         }
     }
+
+    /**
+     * Constructor del GridBus, determina las características del Grid, asi como el piso que se muestra
+     * @param viaje Viaje del que se están mostrando los asientos
+     * @param floor Piso del bus del cual se están mostrando los asientos
+     */
     public GridBus(Viaje viaje, int floor) {
         this.selectedSeats = new String[]{};
         this.piso = floor;

@@ -1,10 +1,17 @@
 package main.Buses;
 
 import main.Enums.Espacio;
-import main.Main;
 
+/**
+ * Define y permite construir un modelo de bus
+ * @see BusBuilder
+ */
 public class BusDirector {
+
+    /** Builder el cual construirá el bus especificado */
     private final BusBuilder builder = new BusBuilder();
+
+    /** Bus de un piso solo con asientos semicama */
     public Bus semicama_comun1F() {
         builder.reset();
         builder.set1FSize(5, 10);
@@ -13,6 +20,8 @@ public class BusDirector {
         builder.addObjRect(1, 3, 9, 1, 2, Espacio.VACIO);
         return builder.getBus();
     }
+
+    /** Bus de dos pisos solo con asientos semicama */
     public Bus semicama_2F() {
         builder.reset();
         builder.set1FSize(5, 10);
@@ -26,6 +35,7 @@ public class BusDirector {
         return builder.getBus();
     }
 
+    /** Bus de dos pisos con asientos salon cama abajo y asientos semicama arriba */
     public Bus mixto_comun_2F() {
         builder.reset();
         builder.set1FSize(3, 5);
