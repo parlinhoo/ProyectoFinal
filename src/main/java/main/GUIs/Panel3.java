@@ -9,16 +9,28 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+/**
+ * Tercer panel de la interfaz, permite al usuario elegir entre todos los buses disponibles
+ */
 public class Panel3 extends JPanel {
 
+    /** Label asociado al número de asientos seleccionados en el primer piso*/
     public JLabel asientosSeleccionadosp1;
+    /** Label asociado al número de asientos seleccionados en el segundo piso*/
     public JLabel asientosSeleccionadosp2;
 
     static Color emebus = new Color(0x0071AE);
 
+    /**
+     * Constructor del panel, define la posición de los botones y los labels y el/los GridBus
+     * @param viaje Viaje del cual se muestran los asientos
+     * @param panel Panel contenedor asociado
+     * @param cardLayout Cardlayout asociado
+     */
     public Panel3(Viaje viaje, JPanel panel, CardLayout cardLayout) {
         this.setLayout(new BorderLayout());
 
+        /* Panel que representa la parte superior del Panel3 */
         JPanel header = new JPanel(new GridBagLayout()) {
             {
                 setPreferredSize(new Dimension(800, 75));
@@ -52,6 +64,7 @@ public class Panel3 extends JPanel {
 
         Panel3 ref = this;
 
+        /* Panel que permite la  vista y compra de los asientos de un bus */
         JPanel menuCompra = new JPanel(){
             {
                 int x = 550;

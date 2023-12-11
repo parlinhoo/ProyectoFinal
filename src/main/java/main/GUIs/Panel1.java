@@ -9,11 +9,17 @@ import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * Primer panel de la interfaz, permite al usuario elegir desde y a donde se hará el viaje, asi como también la fecha del mismo
+ */
 public class Panel1 extends JPanel {
-
     static Color emebus = new Color(0x0071AE);
-
-    public Panel1(PanelPrincipal panel, CardLayout cardLayout) {
+    /**
+     * Constructor del panel, define la posición de los botones y los labels
+     * @param panelPrincipal Panel contenedor asociado
+     * @param cardLayout Cardlayout asociado
+     */
+    public Panel1(PanelPrincipal panelPrincipal, CardLayout cardLayout) {
         this.setBackground(Color.WHITE);
         this.setLayout(null);
         int y = 350;
@@ -79,8 +85,8 @@ public class Panel1 extends JPanel {
             String destino = (String) comboBoxDestino.getSelectedItem();
             Date hora = (Date) datePicker.getValue();
             LocalDate horaLocal = LocalDate.of(hora.getYear()+1900, hora.getMonth()+1, hora.getDate());
-            panel.updateBuses(origen, destino, horaLocal);
-            cardLayout.show(panel, "panelBuses");
+            panelPrincipal.updateBuses(origen, destino, horaLocal);
+            cardLayout.show(panelPrincipal, "panelBuses");
         });
         this.add(BuscarBusesButton);
         try {
