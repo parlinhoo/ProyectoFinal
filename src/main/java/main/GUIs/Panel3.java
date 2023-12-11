@@ -3,13 +3,18 @@ package main.GUIs;
 import main.Buses.GridBus;
 import main.Ventana;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class Panel3 extends JPanel {
 
     public JLabel asientosSeleccionadosp1;
     public JLabel asientosSeleccionadosp2;
+
+    static Color emebus = new Color(0x0071AE);
 
     public Panel3(Viaje viaje, JPanel panel, CardLayout cardLayout) {
         this.setLayout(new BorderLayout());
@@ -28,7 +33,7 @@ public class Panel3 extends JPanel {
 
                 JButton volverButton = new JButton();
                 volverButton.setPreferredSize(new Dimension(50, 30));
-                volverButton.setBackground(Color.BLACK);
+                volverButton.setBackground(emebus);
                 volverButton.setIcon(new ImageIcon("src/main/resources/return.png"));
                 volverButton.addActionListener(e -> cardLayout.show(panel, "panelBuses"));
                 add(volverButton, gbc);
@@ -37,6 +42,7 @@ public class Panel3 extends JPanel {
 
                 JLabel headline = new JLabel("Elige los asientos");
                 headline.setFont(new Font("IMPACT", Font.BOLD, 35));
+                headline.setForeground(emebus);
                 add(headline, gbc);
             }
         };
@@ -79,13 +85,15 @@ public class Panel3 extends JPanel {
                 }
 
                 JLabel piso1 = new JLabel("Piso 1");
+                piso1.setForeground(emebus);
                 piso1.setFont(new Font("IMPACT", Font.BOLD, 30));
-                piso1.setBounds(gridBus_1F.getX() + 100, gridBus_1F.getY() + (int) (gridBus_1F.getHeight() * 0.95), 300, 100);
+                piso1.setBounds(gridBus_1F.getX()+(int) (gridBus_1F.getWidth()*0.35), gridBus_1F.getY() + (int) (gridBus_1F.getHeight() * 0.95), 300, 100);
                 add(piso1);
 
                 if (gridBus_2F != null){
                     add(gridBus_2F);
                     JLabel piso2 = new JLabel("Piso 2");
+                    piso2.setForeground(emebus);
                     piso2.setFont(new Font("IMPACT", Font.BOLD, 30));
                     piso2.setBounds(gridBus_2F.getX() + 100, gridBus_2F.getY() + (int) (gridBus_2F.getHeight() * 0.95), 300, 100);
                     add(piso2);
@@ -94,6 +102,7 @@ public class Panel3 extends JPanel {
                 JLabel resumen = new JLabel("Resumen del Pedido");
                 resumen.setFont(new Font("IMPACT", Font.BOLD, 30));
                 resumen.setBounds(x, 150, 300, 100);
+                resumen.setForeground(emebus);
                 add(resumen);
 
                 JLabel bus = new JLabel(String.format("<html><b>Tipo de bus:</b> %s<html>", busname));
@@ -128,7 +137,10 @@ public class Panel3 extends JPanel {
                 asientosSeleccionadosp1 = asientosSel;
 
                 JLabel asientosSel2 = null;
+
+                int xfoto = Ventana.anchura-450;
                 if (tipo == 2) {
+                    xfoto = Ventana.anchura-360;
                     asientosSel.setText("Piso 1:");
                     asientosSel2 = new JLabel("Piso 2:");
                     asientosSel2.setFont(new Font("Lucida Sans", Font.PLAIN, fontSize/2));
@@ -136,11 +148,19 @@ public class Panel3 extends JPanel {
                     asientosSeleccionadosp2 = asientosSel2;
                     this.add(asientosSel2);
                 }
+                try {
+                    BufferedImage myPicture = ImageIO.read(new File("src/main/resources/emebus.png"));
+                    JLabel fotito = new JLabel(new ImageIcon(myPicture));
+                    fotito.setBounds(xfoto, -90, 300, 300);
+                    this.add(fotito);
+                } catch (Exception e) {
+                    System.out.println("a");
+                }
 
                 JButton comprar = new JButton("Confirmar Pago");
                 comprar.setFont(new Font("IMPACT", Font.PLAIN, 20));
                 comprar.setForeground(Color.WHITE);
-                comprar.setBackground(Color.BLACK);
+                comprar.setBackground(emebus);
                 comprar.addActionListener(e -> {
                     gridBus_1F.PagarAsientosSeleccionados();
                     if (gridBus_2F != null){

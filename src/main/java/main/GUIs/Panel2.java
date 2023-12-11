@@ -10,6 +10,8 @@ public class Panel2 extends JPanel {
     private JPanel contenedorBuses;
     private CardLayout cardLayout;
 
+    static Color emebus = new Color(0x0071AE);
+
     public void updateBuses(PanelBus[] buses) {
         this.contenedorBuses.removeAll();
         for (PanelBus panel : buses) {
@@ -49,15 +51,23 @@ public class Panel2 extends JPanel {
 
                 JButton volverButton = new JButton();
                 volverButton.setPreferredSize(new Dimension(50, 30));
-                volverButton.setBackground(Color.BLACK);
+                volverButton.setBackground(emebus);
                 volverButton.setIcon(new ImageIcon("src/main/resources/return.png"));
                 volverButton.addActionListener(e -> cardLayout.show(panelPrincipal, "panelInicio"));
                 add(volverButton, gbc);
 
-                gbc.anchor = GridBagConstraints.CENTER;
+                JLabel emebusbutton = new JLabel();
+                emebusbutton.setPreferredSize(new Dimension(80, 80));
+                emebusbutton.setIcon(new ImageIcon("src/main/resources/emebus80.png"));
+                gbc.gridx = 1;
+                gbc.anchor = GridBagConstraints.EAST;
+                add(emebusbutton, gbc);
+
+                gbc.gridx = 0;
 
                 JLabel headline = new JLabel("Buses Disponibles");
                 headline.setFont(new Font("IMPACT", Font.BOLD, 35));
+                headline.setForeground(emebus);
                 add(headline, gbc);
             }
         };

@@ -1,12 +1,17 @@
 package main.GUIs;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Panel1 extends JPanel {
+
+    static Color emebus = new Color(0x0071AE);
 
     public Panel1(PanelPrincipal panel, CardLayout cardLayout) {
         this.setBackground(Color.WHITE);
@@ -25,15 +30,18 @@ public class Panel1 extends JPanel {
         JLabel from = new JLabel("Desde:");
         from.setBounds(100, y - comboBoxHeight  - gapY, labelWidth, labelHeight);
         from.setFont(new Font(fontName, Font.PLAIN, fontSize));
+        from.setForeground(emebus);
         this.add(from);
         JComboBox<String> comboBoxOrigen = new JComboBox<>(ciudades);
         comboBoxOrigen.setBackground(Color.WHITE);
         comboBoxOrigen.setBounds(100, y, comboBoxWidth, comboBoxHeight);
         this.add(comboBoxOrigen);
 
+
         JLabel to = new JLabel("Hasta:");
         to.setBounds(from.getX() + comboBoxWidth + gapX, y - comboBoxHeight  - gapY, labelWidth, labelHeight);
         to.setFont(new Font(fontName, Font.PLAIN, fontSize));
+        to.setForeground(emebus);
         this.add(to);
         JComboBox<String> comboBoxDestino = new JComboBox<>(ciudades);
         comboBoxDestino.setBounds(comboBoxOrigen.getX() + comboBoxWidth + gapX, y, comboBoxWidth, comboBoxHeight);
@@ -43,6 +51,7 @@ public class Panel1 extends JPanel {
         JLabel day = new JLabel("Día:");
         day.setBounds(to.getX() + comboBoxWidth + gapX, y - comboBoxHeight  - gapY, labelWidth, labelHeight);
         day.setFont(new Font(fontName, Font.PLAIN, fontSize));
+        day.setForeground(emebus);
         this.add(day);
 
         Date hoy = new Date();
@@ -64,7 +73,7 @@ public class Panel1 extends JPanel {
         BuscarBusesButton.setBounds(400, 450, 150, 50);
         BuscarBusesButton.setFont(new Font(fontName, Font.PLAIN, fontSize));
         BuscarBusesButton.setForeground(Color.WHITE);
-        BuscarBusesButton.setBackground(Color.BLACK);
+        BuscarBusesButton.setBackground(emebus);
         BuscarBusesButton.addActionListener((e) -> {
             String origen = (String) comboBoxOrigen.getSelectedItem();
             String destino = (String) comboBoxDestino.getSelectedItem();
@@ -74,5 +83,13 @@ public class Panel1 extends JPanel {
             cardLayout.show(panel, "panelBuses");
         });
         this.add(BuscarBusesButton);
+        try {
+            BufferedImage myPicture = ImageIO.read(new File("src/main/resources/emebus.png"));
+            JLabel fotito = new JLabel(new ImageIcon(myPicture));
+            fotito.setBounds(10, -30, 300, 300);
+            this.add(fotito);
+        } catch (Exception e) {
+            System.out.println("a");
+        }
     }
 }
