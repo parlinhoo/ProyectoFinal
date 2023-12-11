@@ -12,13 +12,26 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Panel contenedor de los demás paneles de la interfaz
+ */
 public class PanelPrincipal extends JPanel {
+    /** Permite cambiar entre los distintos paneles de la interfaz */
     private CardLayout cardLayout;
+    /** Primer panel a mostrar */
     private JPanel panelInicio;
+    /** Segundo panel a mostrar */
     private Panel2 panelBuses;
+    /** Flota de buses disponibles en el programa */
     private Bus[][] flota;
+    /** Array de viajes disponibles en el programa */
     private Viaje[] viajes;
 
+    /** Permite actualizar y relacionar los viajes elegidos por el usuario con los disponibles
+     * @param origen Origen elegido por el usuario
+     * @param destino Destino elegido por el usuario
+     * @param fecha Fecha elegida por el usuario
+     */
     public void updateBuses(String origen, String destino, LocalDate fecha) {
         ArrayList<Viaje> localviajes = new ArrayList<>();
         for (Viaje viaje : viajes) {
@@ -31,6 +44,10 @@ public class PanelPrincipal extends JPanel {
         }
         panelBuses.updateBuses(paneles);
     }
+
+    /** Permite inicializar la flota de buses, creando los buses mediante BusDirector
+     * @see BusDirector
+     */
     private void inicializarFlota() {
         BusDirector director = new BusDirector();
         int AAAAAA = 15;
@@ -47,6 +64,7 @@ public class PanelPrincipal extends JPanel {
     private int flota1 = 0;
     private int flota2 = 0;
     private int flota3 = 0;
+
     private Bus obtenerSigFlota(int bus){
         switch (bus) {
             case 0 -> {
@@ -74,6 +92,10 @@ public class PanelPrincipal extends JPanel {
             }
         }
     }
+
+    /** Permite inicializar los viajes
+     * @see Viaje
+     */
     private void crearViajes() {
         LocalDateTime tiempoCCP_STGO1 = LocalDateTime.of(2023, 12, 10, 6, 0, 0);
         LocalDateTime tiempoCCP_STGO2 = LocalDateTime.of(2023, 12, 10, 9, 0, 0);
@@ -145,6 +167,10 @@ public class PanelPrincipal extends JPanel {
         }
         this.viajes = viajestemp.toArray(new Viaje[]{});
     }
+
+    /**
+     * Constructor del panel por defecto, inicializa la flota y crea los viajes, al igual que organizar el cardlayout
+     */
     public PanelPrincipal() {
         this.inicializarFlota();
         this.crearViajes();

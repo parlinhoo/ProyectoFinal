@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Segundo panel de la interfaz, permite al usuario elegir entre todos los buses disponibles
+ */
 public class Panel2 extends JPanel {
     private JPanel panelPrincipal;
     private JPanel contenedorBuses;
