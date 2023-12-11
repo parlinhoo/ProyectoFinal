@@ -22,13 +22,13 @@ El proyecto final tiene como objetivo desarrollar un "Sistema de reserva de asie
 
 ### Primera Pagina
 Permite al usuario elegir desde y a donde se hará el viaje, asi como también la fecha del mismo
-![Interfaz de la Aplicación](https://github.com/parlinhoo/ProyectoFinal/blob/main/Captura1.PNG?raw=true)
+![Interfaz de la Aplicación](https://github.com/parlinhoo/ProyectoFinal/blob/main/CAPTURA1.png?raw=true)
 ### Segunda Pagina
 Permite al usuario elegir entre todos los buses disponibles
-![Interfaz de la Aplicación](https://github.com/parlinhoo/ProyectoFinal/blob/main/Captura2.PNG?raw=true)
+![Interfaz de la Aplicación](https://github.com/parlinhoo/ProyectoFinal/blob/main/CAPTURA2.png?raw=true)
 ### Tercera Página
 Permite al usuario ver y elegir entre los asientos disponibles en el bus elegido, al igual que confirmar el pago para reservar los asientos elegidos
-![Interfaz de la Aplicación](https://github.com/parlinhoo/ProyectoFinal/blob/main/Captura3.PNG?raw=true)
+![Interfaz de la Aplicación](https://github.com/parlinhoo/ProyectoFinal/blob/main/CAPTURA3.png?raw=true)
 
 ## Decisiones Tomadas durante el Proyecto
 
