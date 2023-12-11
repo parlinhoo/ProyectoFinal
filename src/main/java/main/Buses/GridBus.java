@@ -54,6 +54,7 @@ public class GridBus extends JPanel {
      * Setter del linkedPanel
      * @param panel Panel3 asociado par mostrar los asientos
      */
+
     public void linkPanel(Panel3 panel) {
         this.linkedPanel = panel;
     }

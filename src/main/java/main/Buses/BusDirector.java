@@ -36,7 +36,7 @@ public class BusDirector {
     }
 
     /** Bus de dos pisos con asientos salon cama abajo y asientos semicama arriba */
-    public Bus mixto_comun_2F() {
+    public Bus mixto_premium_2F() {
         builder.reset();
         builder.set1FSize(3, 5);
         builder.addObjRect(1, 0, 0, 5, 3, Espacio.SALONCAMA);
@@ -46,6 +46,15 @@ public class BusDirector {
         builder.addObjRect(2, 0, 0, 10, 5, Espacio.SEMICAMA);
         builder.addObjRow(2, 2, Espacio.VACIO);
         builder.addObjRect(2, 3, 9, 1, 2, Espacio.VACIO);
+        return builder.getBus();
+    }
+    /** Bus de un solo piso con asientos salon cama */
+    public Bus saloncama_premium1F() {
+        builder.reset();
+        builder.set1FSize(3, 10);
+        builder.addObjRect(1, 0, 0, 10, 3, Espacio.SALONCAMA);
+        builder.addObjRow(1, 1, Espacio.VACIO);
+        builder.addObjRect(1, 1, 9, 1, 2, Espacio.VACIO);
         return builder.getBus();
     }
 }

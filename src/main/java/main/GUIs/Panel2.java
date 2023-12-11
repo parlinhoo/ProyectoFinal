@@ -5,23 +5,11 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/**
- * Segundo panel de la interfaz, permite al usuario elegir entre todos los buses disponibles
- */
 public class Panel2 extends JPanel {
-
-    /** Panel contenedor asociado */
     private JPanel panelPrincipal;
-    /** Panel contenedor de los paneles de Buses */
     private JPanel contenedorBuses;
-    /** Panel contenedor de los paneles de Buses */
     private CardLayout cardLayout;
 
-    /**
-     * Permite actualizar los panelesBus
-     * @param buses Array de panelesBus a mostrar o actualizar
-     * @see PanelBus
-     */
     public void updateBuses(PanelBus[] buses) {
         this.contenedorBuses.removeAll();
         for (PanelBus panel : buses) {
@@ -41,11 +29,6 @@ public class Panel2 extends JPanel {
         this.contenedorBuses.add(Box.createVerticalGlue());
     }
 
-    /**
-     * Constructor del panel, define la posición de los botones y los labels
-     * @param panelPrincipal Panel contenedor asociado
-     * @param cardLayout Cardlayout asociado
-     */
     public Panel2(JPanel panelPrincipal, CardLayout cardLayout) {
         this.panelPrincipal = panelPrincipal;
         this.cardLayout = cardLayout;
