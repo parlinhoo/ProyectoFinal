@@ -38,15 +38,11 @@ public class Viaje {
         if (piso == 2) this.gridF2 = grid;
         else this.gridF1 = grid;
     }
-    public GridBus getGrid(int piso) {
-        return (piso == 2) ? this.gridF2 : this.gridF1;
-    }
     public PanelBus getPanel() {
         return this.panelViaje;
     }
 
     private void updateGrids() {
-        System.out.println("AAA");
         this.gridF1.updateGrid();
         this.panelViaje.updateSeats();
         if (this.gridF2 != null) this.gridF2.updateGrid();
@@ -82,12 +78,5 @@ public class Viaje {
         Asiento[][] asientos = (piso == 2) ? this.asientosF2 : this.asientosF1;
         asientos[row][col].cambiarEstado(estado);
         this.updateGrids();
-    }
-
-    // Lista es una lista del tipo lista[n][2], cuya primera dimensión es un array que contiene arrays de longitud 2 con la fila y columna, en orden.
-    public void cambiarEstadoAsientosMult(int piso, int[][] lista, EstadoAsiento estado) {
-        for (int[] posAsiento : lista) {
-            cambiarEstadoAsiento(piso, posAsiento[0], posAsiento[1], estado);
-        }
     }
 }

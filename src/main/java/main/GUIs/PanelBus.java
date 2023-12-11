@@ -11,10 +11,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class PanelBus extends JPanel {
-    private JLabel busInfoLabel;
-    private JLabel pasajesLabel;
-    private JLabel precioLabel;
-    private JLabel asientosLabel;
     private JLabel disponiblesLabel;
     private Viaje viaje;
     private int capacidad;
@@ -106,34 +102,32 @@ public class PanelBus extends JPanel {
             case(1):
                 busname = "Bus Tradicional";
                 xDisponibles = 63;
+                precioPasaje = 12999;
                 break;
             case(2):
                 busname = "Bus de 2 pisos";
                 xDisponibles = 10;
+                precioPasaje = 15999;
                 break;
         }
 
         JLabel busInfo = new JLabel(String.format("%s (Capacidad para %d personas)", busname, capacidad));
-        this.busInfoLabel = busInfo;
         busInfo.setFont(new Font("Lucida Sans", Font.PLAIN, 15));
         busInfo.setBounds(x + 100, y, 360, 40);
         this.add(busInfo);
 
         JLabel pasajes = new JLabel("Pasajes desde");
-        this.pasajesLabel = pasajes;
         pasajes.setFont(new Font("Lucida Sans", Font.BOLD, 15));
         pasajes.setBounds(busInfo.getX() + 360, y, 200, 40);
         this.add(pasajes);
 
         JLabel precio = new JLabel(String.format("$%d", precioPasaje));
-        this.precioLabel = precio;
         precio.setFont(new Font("Lucida Sans", Font.BOLD, 15));
         precio.setForeground(colorPrecio);
         precio.setBounds(pasajes.getX() + 25, y + 25, 100, 40);
         this.add(precio);
 
         JLabel asientos = new JLabel("Asientos Disponibles");
-        this.asientosLabel = asientos;
         asientos.setFont(new Font("Lucida Sans", Font.BOLD, 15));
         asientos.setBounds(precio.getX() + 125, y, 200, 40);
         this.add(asientos);

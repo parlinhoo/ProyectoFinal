@@ -26,7 +26,7 @@ public class Asiento {
     public Asiento(Espacio asiento) {
         this.asiento = asiento;
         switch (asiento) {
-            case SALONCAMA,SEMICAMA,SALONCAMAPLUS -> this.estadoAsiento = EstadoAsiento.LIBRE;
+            case SALONCAMA,SEMICAMA -> this.estadoAsiento = EstadoAsiento.LIBRE;
         }
     }
 }

@@ -6,7 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class Panel2 extends JPanel {
-    private JPanel contenedor;
     private JPanel panelPrincipal;
     private JPanel contenedorBuses;
     private CardLayout cardLayout;

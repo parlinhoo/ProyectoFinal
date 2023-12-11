@@ -16,8 +16,7 @@ public class PanelPrincipal extends JPanel {
     private CardLayout cardLayout;
     private JPanel panelInicio;
     private Panel2 panelBuses;
-    private Panel3 panelAsientos;
-    private Bus[] flota;
+    private Bus[][] flota;
     private Viaje[] viajes;
 
     public void updateBuses(String origen, String destino, LocalDate fecha) {
@@ -34,28 +33,117 @@ public class PanelPrincipal extends JPanel {
     }
     private void inicializarFlota() {
         BusDirector director = new BusDirector();
-        this.flota = new Bus[4];
-        flota[0] = director.semicama_2F();
-        flota[1] = director.semicama_comun1F();
-        flota[2] = director.semicama_2F();
-        flota[3] = director.mixto_comun_2F();
+        int AAAAAA = 15;
+        this.flota = new Bus[4][AAAAAA];
+        for (int i = 0; i < AAAAAA; i++) {
+            flota[0][i] = director.semicama_comun1F();
+            flota[1][i] = director.semicama_2F();
+            flota[2][i] = director.mixto_premium_2F();
+            flota[3][i] = director.saloncama_premium1F();
+        }
+    }
+    //variables auxiliares para asignar buses mas rapido
+    private int flota0 = 0;
+    private int flota1 = 0;
+    private int flota2 = 0;
+    private int flota3 = 0;
+    private Bus obtenerSigFlota(int bus){
+        switch (bus) {
+            case 0 -> {
+                this.flota0++;
+                return this.flota[0][flota0-1];
+            }
+            case 1 -> {
+                this.flota1++;
+                return this.flota[1][flota1-1];
+            }
+            case 2 -> {
+                this.flota2++;
+                return this.flota[2][flota2-1];
+            }
+            case 3 -> {
+                this.flota3++;
+                return this.flota[3][flota3-1];
+            }
+            default -> {
+                this.flota0 = 0;
+                this.flota1 = 0;
+                this.flota2 = 0;
+                this.flota3 = 0;
+                return null;
+            }
+        }
     }
     private void crearViajes() {
-        LocalDateTime tiempobus1 = LocalDateTime.of(2023, 12, 10, 6, 0);
-        LocalDateTime tiempobus2 = LocalDateTime.of(2023, 12, 10, 9, 0);
-        LocalDateTime tiempobus3 = LocalDateTime.of(2023, 12, 10, 12, 0);
-        LocalDateTime tiempobus4 = LocalDateTime.of(2023, 12, 10, 16, 0);
-        Viaje viaje1 = new Viaje(this.flota[0], "Concepción", "Santiago", tiempobus1);
-        Viaje viaje2 = new Viaje(this.flota[0], "Santiago", "Concepción", tiempobus1.plusHours(6));
-        Viaje viaje3 = new Viaje(this.flota[0], "Concepción", "Santiago", tiempobus1.plusHours(12));
-        Viaje viaje4 = new Viaje(this.flota[1], "Concepción", "Santiago", tiempobus2);
-        Viaje viaje5 = new Viaje(this.flota[1], "Santiago", "Concepción", tiempobus2.plusHours(6));
-        Viaje viaje6 = new Viaje(this.flota[1], "Concepción", "Santiago", tiempobus2.plusHours(12));
-        Viaje viaje7 = new Viaje(this.flota[2], "Concepción", "Santiago", tiempobus3);
-        Viaje viaje8 = new Viaje(this.flota[2], "Santiago", "Concepción", tiempobus3.plusHours(6));
-        Viaje viaje9 = new Viaje(this.flota[2], "Concepción", "Santiago", tiempobus3.plusHours(12));
-        Viaje viaje10 = new Viaje(this.flota[3], "Concepción", "Santiago", tiempobus4);
-        this.viajes = new Viaje[] {viaje1, viaje4, viaje7, viaje2, viaje3, viaje5, viaje6, viaje8, viaje9, viaje10};
+        LocalDateTime tiempoCCP_STGO1 = LocalDateTime.of(2023, 12, 10, 6, 0, 0);
+        LocalDateTime tiempoCCP_STGO2 = LocalDateTime.of(2023, 12, 10, 9, 0, 0);
+        LocalDateTime tiempoCCP_STGO3 = LocalDateTime.of(2023, 12, 10, 12, 0, 0);
+        LocalDateTime tiempoCCP_STGO4 = LocalDateTime.of(2023, 12, 10, 15, 0, 0);
+        LocalDateTime tiempoCCP_STGO5 = LocalDateTime.of(2023, 12, 10, 18, 0, 0);
+
+        LocalDateTime tiempoCCP_VALPO1 = LocalDateTime.of(2023, 12, 10, 8, 0, 0);
+        LocalDateTime tiempoCCP_VALPO2 = LocalDateTime.of(2023, 12, 10, 12, 0, 0);
+        LocalDateTime tiempoCCP_VALPO3 = LocalDateTime.of(2023, 12, 10, 16, 0, 0);
+
+        LocalDateTime tiempoSTGO_VALPO1 = LocalDateTime.of(2023, 12, 10, 6, 0, 0);
+        LocalDateTime tiempoSTGO_VALPO2 = LocalDateTime.of(2023, 12, 10, 10, 0, 0);
+        LocalDateTime tiempoSTGO_VALPO3 = LocalDateTime.of(2023, 12, 10, 12, 0, 0);
+        LocalDateTime tiempoSTGO_VALPO4 = LocalDateTime.of(2023, 12, 10, 16, 0, 0);
+
+        String CCP = "Concepción";
+        String STGO = "Santiago";
+        String VALPO = "Valparaíso";
+        ArrayList<Viaje> viajestemp = new ArrayList<>();
+        System.out.println("Cargando viajes....");
+        int dias = 60;
+        for (int i = 0; i <= dias; i++) {
+            if (i == dias/2) System.out.println("50%");
+            obtenerSigFlota(-1);
+            // CONCEPCION A SANTIAGO
+            viajestemp.add(new Viaje(obtenerSigFlota(3), CCP, STGO, tiempoCCP_STGO1.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(1), CCP, STGO, tiempoCCP_STGO3.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(0), CCP, STGO, tiempoCCP_STGO4.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(2), CCP, STGO, tiempoCCP_STGO5.plusDays(i)));
+            // SANTIAGO A CONCEPCION
+            viajestemp.add(new Viaje(obtenerSigFlota(3), STGO, CCP, tiempoCCP_STGO1.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(1), STGO, CCP, tiempoCCP_STGO3.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(0), STGO, CCP, tiempoCCP_STGO4.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(2), STGO, CCP, tiempoCCP_STGO5.plusDays(i)));
+            // CONCEPCION A VALPARAISO
+            viajestemp.add(new Viaje(obtenerSigFlota(0), CCP, VALPO, tiempoCCP_VALPO1.plusDays(i)));
+            viajestemp.add(new Viaje(obtenerSigFlota(2), CCP, VALPO, tiempoCCP_VALPO1.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(0), CCP, VALPO, tiempoCCP_VALPO2.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(1), CCP, VALPO, tiempoCCP_VALPO3.plusDays(i)));
+            // VALPARAISO A CONCEPCION
+            viajestemp.add(new Viaje(obtenerSigFlota(0), VALPO, CCP, tiempoCCP_VALPO1.plusDays(i)));
+            viajestemp.add(new Viaje(obtenerSigFlota(2), VALPO, CCP, tiempoCCP_VALPO1.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(0), VALPO, CCP, tiempoCCP_VALPO2.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(1), VALPO, CCP, tiempoCCP_VALPO3.plusDays(i)));
+            // SANTIAGO A VALPARAISO
+            viajestemp.add(new Viaje(obtenerSigFlota(3), STGO, VALPO, tiempoSTGO_VALPO1.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(1), STGO, VALPO, tiempoSTGO_VALPO3.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(2), STGO, VALPO, tiempoSTGO_VALPO4.plusDays(i)));
+            // VALPARAISO A SANTIAGO
+            viajestemp.add(new Viaje(obtenerSigFlota(3), VALPO, STGO, tiempoSTGO_VALPO1.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(1), VALPO, STGO, tiempoSTGO_VALPO3.plusDays(i)));
+
+            viajestemp.add(new Viaje(obtenerSigFlota(1), VALPO, STGO, tiempoSTGO_VALPO4.plusDays(i)));
+            viajestemp.add(new Viaje(obtenerSigFlota(2), VALPO, STGO, tiempoSTGO_VALPO4.plusDays(i)));
+        }
+        this.viajes = viajestemp.toArray(new Viaje[]{});
     }
     public PanelPrincipal() {
         this.inicializarFlota();

@@ -22,9 +22,6 @@ public class GridBus extends JPanel {
     private Panel3 linkedPanel;
     public int floor = 0;
 
-    public String[] getSelectedSeats() {
-        return this.selectedSeats;
-    }
     public void linkPanel(Panel3 panel) {
         this.linkedPanel = panel;
     }
